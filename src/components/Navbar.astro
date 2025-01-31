@@ -1,0 +1,73 @@
+---
+import Menu from "../icons/Menu.astro"
+import { Image } from "astro:assets"
+import img from "../assets/logo.png"
+
+// export const prerender = true
+---
+
+<nav>
+    <div class="flex flex-col">
+        <div class="flex align-center py-5">
+        <!-- Logotipo -->
+            <a href="/">
+              <Image src={img} alt="Logotipo MJ Procuradora" class="h-16 w-auto ml-4 lg:ml-20"/>
+                <!-- <img class="h-16 w-16 ml-4 lg:h-24 lg:w-24 lg:ml-20" src="/src/assets/mj-bg.PNG" alt="Logotipo MJ Procuradora"> -->
+            </a>
+    
+            <!-- Toggle Menu -->
+            <button
+            class="mr-8 lg:mr-20 flex flex-1 sm:hidden items-center justify-end">
+              <span id="menu-toggle">
+                <Menu />
+              </span>
+            </button>
+
+            <!-- LG Menu -->
+            <div class="mr-20 hidden sm:flex flex-1 gap-8 items-center justify-end">
+                <a class="text-lg text-gray-100 font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/">Inicio</a>
+                <a class="text-lg text-gray-100 font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/servicios">Servicios</a>
+                <!-- <a class="text-lg text-gray-100 font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/recursos">Recursos</a> -->
+                <a class="text-lg text-gray-100 font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/contacto">Contacto</a>
+            </div>
+        </div>
+
+        <!-- XS Menu -->
+          <div class="relative flex  w-screen justify-end">
+            <div id="menu" class="not-visible gap-2 w-screen ml-auto rounded-b-md flex flex-col items-center absolute top-0 z-10 bg-white sm:hidden">
+                <a class="text-slate-900 pt-4 font-bold" href="/">Inicio</a>
+                <a class="text-slate-900 pt-1 font-bold" href="/servicios">Servicios</a>
+                <!-- <a class="text-slate-900 pt-1 font-bold" href="/recursos">Recursos</a> -->
+                <a class="text-slate-900 pt-1 pb-4 font-bold" href="/contacto">Contacto</a>
+            </div>
+          </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("menu");
+    
+    if (menuToggle && menu !== null) {
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("visible");
+        menu.classList.toggle("not-visible");
+      });
+    }
+  });
+</script>
+
+<style>
+    .not-visible {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+  
+    .visible {
+      max-height: 350px;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+    }
+  </style>

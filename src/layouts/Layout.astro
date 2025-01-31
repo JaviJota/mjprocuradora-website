@@ -1,0 +1,41 @@
+---
+import "@fontsource-variable/onest"
+import Navbar from "../components/Navbar.astro"
+import Footer from "../components/Footer.astro"
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content="María José Carralero Medina, procuradora en Córdoba con amplia trayectoria. Representación procesal, gestión de trámites judiciales y asesoramiento legal.">
+		<meta name="keywords" content="procuradora Córdoba, representación procesal, procurador tribunales, trámites judiciales, gestión legal, embargos, ejecuciones, servicios jurídicos">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<!-- <meta name="generator" content={Astro.generator} /> -->
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="fixed left-0 top-0 -z-10 h-full w-full">
+			<div class="relative h-full w-full bg-black"><div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div><div class="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#fbfbfb36,#000)]"></div></div>		
+		</div>
+		<Navbar />
+		<slot />
+		<hr class="opacity-5">
+		<Footer />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		font-family: "Onest Variable", sans-serif;
+	}
+</style>

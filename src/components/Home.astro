@@ -1,0 +1,42 @@
+---
+import Intro from "../assets/intro.md";
+import { Image } from "astro:assets";
+import img from "../assets/Maria-Jose-Carralero-Medina.jpg"
+---
+
+<div class="h-auto lg:h-[400px] bg-[url('/hero.webp')] bg-cover text-center content-center bg-center">
+  <h1
+    class="text-2xl text-gray-100 font-extrabold leading-normal lg:text-4xl mt-10 lg:mt-0 p-6 drop-shadow-md"
+  >
+    Tu respaldo legal en cada paso del camino.
+  </h1>
+  <div class="mb-5 lg:mb-0 lg:mt-10 flex justify-center">
+    <!-- <a
+      href="/servicios"
+      class="font-semibold text-sm text-gray-100 lg:text-base px-4 py-2 lg:px-5 lg:py-3 mr-4 rounded-md transition bg-slate-500 drop-shadow-md hover:bg-slate-600 hover:scale-105 active:bg-slate-700"
+    >
+      Servicios
+    </a> -->
+    <a
+      href="/contacto"
+      class="font-semibold text-sm text-gray-100 lg:text-base px-4 py-2 lg:px-5 lg:py-3 ml-4 rounded-md transition bg-slate-500 drop-shadow-md hover:bg-slate-600 hover:scale-105 active:bg-slate-700"
+    >
+      Solicita una consulta
+    </a>
+  </div>
+</div>
+<div class="  flex flex-col lg:flex-row justify-center lg:justify-around items-center my-16">
+  <div class="w-72 sm:w-full lg:mt-10 prose prose-invert">
+    <Intro />
+  </div>
+  <Image 
+    class="w-72 lg:w-96 mt-5 lg:mt-0 object-cover rounded-md drop-shadow-lg"
+    src={img} 
+    alt="María José Carralero Medina" 
+    />
+  <!-- <img
+    class="w-72 lg:w-96 mt-5 lg:mt-0 object-cover rounded-md drop-shadow-lg"
+    src="/src/assets/Maria-Jose-Carralero-Medina.jpg"
+    alt="María José Carralero Medina"
+  /> -->
+</div>

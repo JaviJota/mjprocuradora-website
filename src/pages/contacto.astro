@@ -1,0 +1,82 @@
+---
+import Mail from "../icons/Mail.astro";
+import Phone from "../icons/Phone.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contacto - María José Carralero Medina - Procuradora Córdoba">
+    <main class="mb-10">
+        <h1 class="mt-10 lg:ml-32 text-4xl text-gray-200 font-semibold text-center lg:text-left">Contacto</h1>
+        <hr class="opacity-20 mt-4 mx-auto lg:ml-32 w-3/4 hidden lg:block">
+        <section class="grid grid-cols-1 lg:grid-cols-2 w-3/4 mx-auto mt-16">
+            <div class="mb-8 lg:mb-0">
+                <h1 class="text-2xl text-white font-semibold text-center lg:text-left">Datos de contacto</h1>
+                <ul class="mt-5">
+                    <li class="flex items-center justify-center lg:justify-start mb-3">
+                        <Mail />
+                        <p class="text-white ml-3">mjcarralero@cordoba.cgpe.net</p>
+                    </li>
+                    <li class="flex items-center justify-center lg:justify-start mb-3">
+                        <Phone />
+                        <p class="text-white ml-3">+34 687 775 744</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="lg:border-l border-gray-500 lg:pl-10">
+                <h2 class="text-2xl text-white font-semibold text-center lg:text-left lg:ml-5 mb-4">Formulario de contacto</h2>
+                <form id="contact-form" class="mx-5" action="">
+                    
+                    <fieldset class="flex flex-col lg:flex-row lg:justify-between mb-4">
+                        <div class="flex flex-col mb-4 lg:mb-0">
+                            <input class="rounded-md px-2 py-1" type="text" name="nombre" id="nombre" required/>
+                            <label class="text-white text-sm mt-1" for="">Nombre</label>
+                        </div>
+                        <div class="flex flex-col">
+                            <input class="rounded-md px-2 py-1" type="text" name="apellido" id="apellido" required/>
+                            <label class="text-white text-sm mt-1" for="">Apellidos</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="flex flex-col mb-4">
+                        <input class="rounded-md px-2 py-1 lg:w-3/4" type="email" name="email" id="email" required/>
+                        <label class="text-white text-sm mt-1" for="">Correo electrónico</label>
+                    </fieldset>
+
+                    <fieldset class="flex flex-col mb-4">
+                        <input class="rounded-md px-2 py-1 lg:w-2/3" type="text" name="teléfono" id="teléfono" required/>
+                        <label class="text-white text-sm mt-1" for="">Número de teléfono</label>
+                    </fieldset>
+
+                    <fieldset class="flex flex-col">
+                        <textarea class="rounded-md px-2 py-1 min-h-32" name="descripción" id="descripción" required/>
+                        <label class="text-white text-sm mt-1" for="">Descripción</label>
+                    </fieldset>
+
+                    <button type="submit" class="transtion w-full lg:w-auto rounded-md bg-gray-500 px-3 py-1.5 mt-3 text-sm font-semibold text-white shadow-xs hover:bg-gray-600 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">Enviar</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+</Layout>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+
+    if (form) {
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                body: formData
+            });
+            const result = await response.json();
+            location.reload()
+        });
+    }
+});
+</script>

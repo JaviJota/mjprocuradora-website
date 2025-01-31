@@ -1,0 +1,7 @@
+María José Carralero Medina es una procuradora en Córdoba con una larga trayectoria en el ámbito jurídico, siendo una profesional de referencia en la región. Con una sólida formación y un profundo conocimiento del sistema legal, actualmente ocupa el cargo de decana del Ilustre Colegio de Procuradores de Córdoba y vicepresidenta del Consejo Andaluz de Procuradores, donde lidera y promueve la modernización y fortalecimiento de la profesión.
+
+Como procuradora en Córdoba, María José Carralero Medina ha demostrado un compromiso constante con la excelencia profesional, ofreciendo servicios jurídicos de alta calidad tanto a clientes particulares como a entidades corporativas. Además, su experiencia como abogada colegiada no ejerciente le permite contar con una visión integral del ejercicio del derecho, combinando su expertise en la procura con un profundo entendimiento de la abogacía.
+
+Su dedicación también se extiende al ámbito académico, siendo profesora del Máster de Abogacía en la Universidad de Córdoba, donde forma a futuros profesionales del derecho, transmitiendo sus conocimientos y experiencia para garantizar la calidad en la práctica jurídica.
+
+Con una reputación consolidada, María José Carralero Medina es la opción ideal para aquellos que busquen una procuradora experta en Córdoba comprometida con la defensa de los derechos e intereses de sus clientes, siempre con una visión ética, moderna y profesional.
