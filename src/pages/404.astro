@@ -2,14 +2,23 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Página no encontrada">
+<Layout title="Página no encontrada - Procuradora Córdoba - María José Carralero Medina">
     <main class="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
         <div class="text-center">
-          <p class="text-base font-semibold text-gray-400">404</p>
+          <p class="text-base font-semibold text-gray-300">404</p>
           <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-200 sm:text-7xl">Página no encontrada</h1>
-          <p class="mt-6 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Lo sentimos, no pudimos encontrar la página que buscas.</p>
+          <p class="mt-6 text-lg font-medium text-pretty text-gray-300 sm:text-xl/8">Lo sentimos, no pudimos encontrar la página que buscas.</p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a href="/" class="rounded-md bg-gray-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-gray-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">Ir al inicio</a>
+            <a 
+              href="/" 
+              class="
+                font-semibold text-sm text-white lg:text-base 
+                px-4 py-2 lg:px-5 lg:py-3 mt-4 w-full rounded-md transition 
+                bg-[#2A3B47] drop-shadow-md hover:bg-[#bfa76a] 
+                hover:scale-105 active:bg-[#a18550] border border-white/50"
+            >
+              Ir al inicio
+            </a>
           </div>
         </div>
       </main>

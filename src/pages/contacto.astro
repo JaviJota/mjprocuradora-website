@@ -4,7 +4,7 @@ import Phone from "../icons/Phone.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Contacto - María José Carralero Medina - Procuradora Córdoba">
+<Layout title="Contacto - Procuradora Córdoba - María José Carralero Medina">
     <main class="mb-10">
         <h1 class="mt-10 lg:ml-32 text-4xl text-gray-200 font-semibold text-center lg:text-left">Contacto</h1>
         <hr class="opacity-20 mt-4 mx-auto lg:ml-32 w-3/4 hidden lg:block">
@@ -27,13 +27,13 @@ import Layout from "../layouts/Layout.astro";
                 <h2 class="text-2xl text-white font-semibold text-center lg:text-left lg:ml-5 mb-4">Formulario de contacto</h2>
                 <form id="contact-form" class="mx-5" action="">
                     
-                    <fieldset class="flex flex-col lg:flex-row lg:justify-between mb-4">
-                        <div class="flex flex-col mb-4 lg:mb-0">
-                            <input class="rounded-md px-2 py-1" type="text" name="nombre" id="nombre" required/>
+                    <fieldset class="flex flex-col lg:flex-row mb-4">
+                        <div class="flex flex-col w-full mb-4 lg:mr-5 lg:mb-0">
+                            <input class="rounded-md px-2 py-1 w-full" type="text" name="nombre" id="nombre" required/>
                             <label class="text-white text-sm mt-1" for="">Nombre</label>
                         </div>
-                        <div class="flex flex-col">
-                            <input class="rounded-md px-2 py-1" type="text" name="apellido" id="apellido" required/>
+                        <div class="flex flex-col w-full">
+                            <input class="rounded-md px-2 py-1 w-full" type="text" name="apellido" id="apellido" required/>
                             <label class="text-white text-sm mt-1" for="">Apellidos</label>
                         </div>
                     </fieldset>
@@ -53,7 +53,16 @@ import Layout from "../layouts/Layout.astro";
                         <label class="text-white text-sm mt-1" for="">Descripción</label>
                     </fieldset>
 
-                    <button type="submit" class="transtion w-full lg:w-auto rounded-md bg-gray-500 px-3 py-1.5 mt-3 text-sm font-semibold text-white shadow-xs hover:bg-gray-600 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800">Enviar</button>
+                    <button 
+                        type="submit" 
+                        class="
+                            font-semibold text-sm text-white lg:text-base 
+                            px-4 py-2 lg:px-5 lg:py-3 mt-4 w-full rounded-md transition 
+                            bg-[#2A3B47] drop-shadow-md hover:bg-[#bfa76a] 
+                            hover:scale-105 active:bg-[#a18550] border border-white/50"
+                    >
+                        Enviar
+                    </button>
                 </form>
             </div>
 

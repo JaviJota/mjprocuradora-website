@@ -1,12 +1,12 @@
 ---
 import Intro from "../assets/intro.md";
 import { Image } from "astro:assets";
-import img from "../assets/Maria-Jose-Carralero-Medina.jpg"
+import img from "../assets/Maria-Jose-Carralero-Medina.webp"
 ---
 
-<div class="h-auto lg:h-[400px] bg-[url('/hero.webp')] bg-cover text-center content-center bg-center">
+<div class="h-auto lg:h-[400px] bg-[url('/src/assets/hero.webp')] bg-cover text-center content-center bg-center">
   <h1
-    class="text-2xl text-gray-100 font-extrabold leading-normal lg:text-4xl mt-10 lg:mt-0 p-6 drop-shadow-md"
+    class="text-2xl text-white font-extrabold leading-normal lg:text-4xl mt-10 lg:mt-0 p-6 drop-shadow-md"
   >
     Tu respaldo legal en cada paso del camino.
   </h1>
@@ -18,11 +18,14 @@ import img from "../assets/Maria-Jose-Carralero-Medina.jpg"
       Servicios
     </a> -->
     <a
-      href="/contacto"
-      class="font-semibold text-sm text-gray-100 lg:text-base px-4 py-2 lg:px-5 lg:py-3 ml-4 rounded-md transition bg-slate-500 drop-shadow-md hover:bg-slate-600 hover:scale-105 active:bg-slate-700"
-    >
-      Solicita una consulta
-    </a>
+    href="/contacto"
+    class="font-semibold text-sm text-white lg:text-base px-4 py-2 lg:px-5 lg:py-3 ml-4 rounded-md transition 
+           bg-[#2A3B47] drop-shadow-md hover:bg-[#bfa76a] hover:scale-105 active:bg-[#a18550] 
+           border border-white/50"
+  >
+    Solicita una consulta
+  </a>
+  
   </div>
 </div>
 <div class="  flex flex-col lg:flex-row justify-center lg:justify-around items-center my-16">

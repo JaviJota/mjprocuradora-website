@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import img from "../assets/court.webp";
+import { Image } from "astro:assets";
+---
+
+<Layout title="Áreas de trabajo - Procuradora Córdoba - María José Carralero Medina">
+  <main class="px-4 sm:px-6 lg:px-32">
+    
+    <h1 class="mt-10 text-4xl font-semibold text-gray-200 text-center lg:text-left">
+      Áreas de trabajo
+    </h1>
+
+    <hr class="hidden lg:block w-3/4 lg:mt-4 opacity-20" />
+
+    <section class="mt-16 flex flex-col gap-8 lg:flex-row lg:justify-between">
+      
+      <div class="px-4 mx-auto lg:mx-0 prose prose-invert flex flex-col lg:pr-8 lg:max-w-[50%]">
+        <p>
+          Soy María José Carralero, procuradora especializada en Derecho Procesal, 
+          y ofrezco un servicio de Procura integral, proporcionando una gestión ágil 
+          y eficaz en todo tipo de procedimientos judiciales. Mi objetivo es garantizar 
+          un trato directo y personalizado, representando a particulares, empresas y 
+          profesionales del derecho con el máximo compromiso y profesionalidad.
+        </p>
+        <p>
+          Trabajo con las últimas tecnologías para optimizar cada trámite, agilizando 
+          la presentación y el seguimiento de escritos, recursos y notificaciones. Gracias 
+          a estas herramientas, aseguro un control preciso de los plazos procesales y una 
+          gestión eficiente adaptada a las necesidades actuales de la profesión.
+        </p>
+        <p>
+          Además, mantengo a mis clientes informados en todo momento sobre el estado de sus 
+          procedimientos, ofreciendo un seguimiento continuo y avisos anticipados. De este modo, 
+          evito urgencias de última hora y garantizo que cada trámite se realice con la planificación 
+          y el rigor que requiere el ejercicio de la Procura.
+        </p>
+      </div>
+
+      <div class="hidden lg:flex items-center lg:w-[50%]">
+        <Image src={img} alt="Juzgado" class="h-full w-auto object-cover rounded-md shadow-md" />
+      </div>
+
+    </section>
+
+    <section class="mt-10 grid grid-cols-1 gap-12 rounded-md bg-white bg-opacity-20 px-4 py-8 
+                    md:grid-cols-2 lg:grid-cols-3 lg:py-16 lg:px-14 lg:justify-items-start">
+      
+      <div class="transition-transform hover:scale-105">
+        <h3 class="text-xl font-semibold text-white lg:text-2xl text-left">
+          Representación y Gestión Judicial
+        </h3>
+        <ul class="mt-6 space-y-4 text-white font-thin">
+          <li>Representación procesal ante todos los juzgados y tribunales.</li>
+          <li>Presentación y seguimiento de demandas, recursos y demás escritos.</li>
+          <li>Control de plazos procesales y coordinación de señalamientos.</li>
+        </ul>
+      </div>
+
+      <div class="transition-transform hover:scale-105">
+        <h3 class="text-xl font-semibold text-white lg:text-2xl text-left">
+          Tramitación de Documentación y Ejecuciones
+        </h3>
+        <ul class="mt-6 space-y-4 text-white font-thin">
+          <li>Gestión de embargos, subastas y ejecución de sentencias.</li>
+          <li>Recepción, traslado y diligenciamiento de notificaciones, mandamientos y exhortos.</li>
+          <li>Tramitación de documentación ante registros y organismos públicos.</li>
+        </ul>
+      </div>
+
+      <div class="transition-transform hover:scale-105">
+        <h3 class="text-xl font-semibold text-white lg:text-2xl text-left">
+          Asesoramiento y Coordinación
+        </h3>
+        <ul class="mt-6 space-y-4 text-white font-thin">
+          <li>Orientación procesal para abogados y clientes.</li>
+          <li>Trabajo conjunto con abogados para una defensa integral.</li>
+          <li>Asesoramiento en la resolución alternativa de conflictos.</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </main>
+</Layout>
