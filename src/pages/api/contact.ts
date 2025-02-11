@@ -32,7 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const ownerResponse = await resend.emails.send({
       from: "MJ Procuradora <info@procuradoracordoba.com>",
-      to: "mjcarralero@cordoba.cgpe.net",
+      to: process.env.OWNER_EMAIL!,
       subject: "Formulario de Contacto",
       html: `
         <div style="font-family: Arial, sans-serif; background-color: #2A3B47; color: white; padding: 20px; border-radius: 10px;">
