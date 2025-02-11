@@ -59,7 +59,7 @@ export const POST: APIRoute = async ({ request }) => {
         <h3>¡Hemos recibido tu formulario!</h3>
         <p>Nos pondremos en contacto contigo a la mayor brevedad posible.</p>
         <p>Un saludo,</p>
-        <p>María Jose Carralero Medina</p>
+        <p>María José Carralero Medina</p>
       `, 
     })
 
