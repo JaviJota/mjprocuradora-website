@@ -1,51 +1,103 @@
 ---
 import Mail from "../icons/Mail.astro";
 import Phone from "../icons/Phone.astro";
+import MapPin from "../icons/MapPin.astro";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+import { Image } from "astro:assets";
+import portrait from "../assets/Maria-Jose-Carralero-Medina.webp";
 
 const input =
-  "mt-2 block w-full rounded-md border-0 bg-white px-3 py-2.5 text-brand-ink shadow-sm " +
-  "placeholder:text-slate-400 focus-visible:outline-brand-gold";
-const label = "block text-sm font-medium text-white";
+  "mt-2 block w-full rounded-xl border border-brand-ink/15 bg-brand-cream/60 px-4 py-3 text-brand-ink " +
+  "transition-[border-color,background-color,box-shadow] duration-150 placeholder:text-brand-muted/70 " +
+  "hover:border-brand-ink/30 focus:border-brand-brass focus:bg-brand-paper focus:outline-none focus:ring-4 focus:ring-brand-brass/20";
+const label = "block text-sm font-semibold text-brand-ink";
+const eyebrow = "inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass-deep";
 ---
 
 <Layout
-  title="Contacto · Procuradora en Córdoba · María José Carralero Medina"
-  description="Contacta con María José Carralero Medina, procuradora en Córdoba. Teléfono +34 687 775 744, correo electrónico o formulario de contacto."
+  title="Contacto · Procuradora en Córdoba · María José Carralero"
+  description="Contacta con María José Carralero, procuradora en Córdoba: teléfono 687 775 744, correo electrónico o formulario. Te respondo personalmente."
 >
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6 lg:px-8 lg:pt-16">
     <header class="max-w-3xl">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">Hablemos de tu caso</p>
-      <h1 class="mt-3 text-4xl font-semibold text-white sm:text-5xl">Contacto</h1>
+      <p class={eyebrow}>
+        <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+        Hablemos de tu caso
+      </p>
+      <h1 class="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-brand-ink sm:text-6xl">Contacto</h1>
+      <p class="mt-6 max-w-xl text-pretty text-xl leading-relaxed text-brand-muted">
+        Cuéntame qué necesitas y te responderé personalmente a la mayor brevedad.
+      </p>
     </header>
 
-    <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
-      <section aria-labelledby="datos">
-        <h2 id="datos" class="text-2xl font-semibold text-white">Datos de contacto</h2>
-        <address class="mt-6 not-italic">
-          <ul class="space-y-4">
-            <li class="flex items-center gap-3">
-              <Mail />
+    <div class="mt-14 grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-10">
+      <section
+        aria-labelledby="datos"
+        class="on-dark relative isolate flex flex-col overflow-hidden rounded-[2rem] bg-brand-ink p-8 text-brand-cream sm:p-10"
+      >
+        <div
+          class="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(184_149_90/0.35),transparent_70%)]"
+          aria-hidden="true"
+        >
+        </div>
+        <h2 id="datos" class="font-serif text-3xl">Datos de contacto</h2>
+        <p class="mt-3 text-brand-cream/75">Si lo prefieres, llámame o escríbeme directamente.</p>
+
+        <address class="mt-10 not-italic">
+          <ul class="space-y-8">
+            <li>
+              <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-brass">
+                <Phone class="text-brand-brass" /> Teléfono
+              </p>
               <a
-                class="break-all text-white underline decoration-white/30 underline-offset-4 hover:decoration-brand-gold"
+                class="mt-2 inline-block font-serif text-3xl text-brand-cream underline decoration-brand-brass/50 underline-offset-8 transition-colors hover:decoration-brand-brass"
+                href="tel:+34687775744">687 775 744</a
+              >
+            </li>
+            <li>
+              <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-brass">
+                <Mail class="text-brand-brass" /> Correo electrónico
+              </p>
+              <a
+                class="mt-2 inline-block break-all text-lg text-brand-cream underline decoration-brand-brass/50 underline-offset-8 transition-colors hover:decoration-brand-brass"
                 href="mailto:mjcarralero@cordoba.cgpe.net">mjcarralero@cordoba.cgpe.net</a
               >
             </li>
-            <li class="flex items-center gap-3">
-              <Phone />
-              <a
-                class="text-white underline decoration-white/30 underline-offset-4 hover:decoration-brand-gold"
-                href="tel:+34687775744">+34 687 775 744</a
-              >
+            <li>
+              <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-brass">
+                <MapPin class="text-brand-brass" /> Ámbito
+              </p>
+              <p class="mt-2 text-lg text-brand-cream">Córdoba y provincia, Sevilla, Málaga, Jaén y Granada</p>
             </li>
           </ul>
         </address>
+
+        <div class="mt-12 flex items-center gap-4 border-t border-white/10 pt-8 lg:mt-auto">
+          <!-- El retrato es de cuerpo entero: se amplía y se encuadra sobre la cara -->
+          <div class="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-brand-brass/60">
+            <Image
+              src={portrait}
+              alt=""
+              widths={[160, 320]}
+              sizes="160px"
+              class="h-full w-full origin-[50%_22%] scale-[2.3] object-cover object-[50%_22%]"
+            />
+          </div>
+          <p class="leading-tight">
+            <span class="block font-serif text-lg">María José Carralero Medina</span>
+            <span class="text-sm text-brand-cream/70">Procuradora de los Tribunales</span>
+          </p>
+        </div>
       </section>
 
-      <section aria-labelledby="formulario" class="rounded-md border border-white/10 bg-white/[0.06] p-6 sm:p-8">
-        <h2 id="formulario" class="text-2xl font-semibold text-white">Formulario de contacto</h2>
-        <p class="mt-2 text-sm text-white/75">Todos los campos son obligatorios.</p>
+      <section
+        aria-labelledby="formulario"
+        class="rounded-[2rem] bg-brand-paper p-6 shadow-[0_30px_60px_-30px_rgb(22_33_43/0.25)] ring-1 ring-brand-ink/5 sm:p-10"
+      >
+        <h2 id="formulario" class="font-serif text-3xl text-brand-ink">Escríbeme</h2>
+        <p class="mt-2 text-sm text-brand-muted">Todos los campos son obligatorios.</p>
 
         <form id="contact-form" class="mt-8 space-y-6" novalidate>
           <div class="grid gap-6 sm:grid-cols-2">
@@ -86,23 +138,26 @@ const label = "block text-sm font-medium text-white";
 
           <div class="flex gap-3">
             <input
-              class="mt-1 h-5 w-5 shrink-0 accent-brand-gold"
+              class="mt-0.5 h-5 w-5 shrink-0 accent-brand-ink"
               type="checkbox"
               id="privacidad"
               name="privacidad"
               required
             />
-            <label for="privacidad" class="text-sm text-white/85">
+            <label for="privacidad" class="text-sm text-brand-muted">
               He leído y acepto la <a
                 href="/politica-de-privacidad"
-                class="text-white underline underline-offset-4 hover:text-brand-gold">política de privacidad</a
+                class="font-medium text-brand-ink underline decoration-brand-brass underline-offset-4">política de privacidad</a
               >.
             </label>
           </div>
 
           <p id="form-status" role="status" aria-live="polite" class="min-h-6 text-sm font-medium"></p>
 
-          <Button type="submit" class="w-full sm:w-auto">Enviar mensaje</Button>
+          <Button type="submit" class="w-full sm:w-auto">
+            Enviar mensaje
+            <ArrowRight />
+          </Button>
         </form>
       </section>
     </div>
@@ -116,8 +171,8 @@ const label = "block text-sm font-medium text-white";
   const setStatus = (message: string, type: "ok" | "error" | "") => {
     if (!status) return;
     status.textContent = message;
-    status.classList.toggle("text-emerald-300", type === "ok");
-    status.classList.toggle("text-red-300", type === "error");
+    status.classList.toggle("text-emerald-700", type === "ok");
+    status.classList.toggle("text-red-700", type === "error");
   };
 
   if (form) {
@@ -162,6 +217,7 @@ const label = "block text-sm font-medium text-white";
 <style>
   input[aria-invalid="true"],
   textarea[aria-invalid="true"] {
-    box-shadow: 0 0 0 2px #fca5a5;
+    border-color: #b91c1c;
+    box-shadow: 0 0 0 3px rgb(185 28 28 / 0.15);
   }
 </style>

@@ -1,107 +1,209 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Button from "../components/Button.astro";
+import CtaBand from "../components/CtaBand.astro";
 import img from "../assets/fotos/firma-escritos-procuradora.jpg";
 import { Image } from "astro:assets";
+import { servicios } from "../data/servicios";
 
-const areas = [
+const compromisos = [
+  { title: "Trato directo", text: "Con particulares, empresas y profesionales del derecho, sin intermediarios." },
+  { title: "Gestión telemática", text: "Presentación y seguimiento de escritos, recursos y notificaciones al día." },
+  { title: "Avisos anticipados", text: "Te informo del estado de tu procedimiento antes de que tengas que preguntar." },
+];
+
+// Preguntas frecuentes: contenido visible en la página y también como FAQPage en JSON-LD
+const preguntas = [
   {
-    title: "Representación y gestión judicial",
-    items: [
-      "Representación procesal ante todos los juzgados y tribunales.",
-      "Presentación y seguimiento de demandas, recursos y demás escritos.",
-      "Control de plazos procesales y coordinación de señalamientos.",
-    ],
+    q: "¿Qué hace un procurador?",
+    a: "El procurador de los tribunales representa a su cliente ante juzgados y tribunales. Presenta demandas, recursos y escritos, recibe y traslada las notificaciones, controla los plazos procesales e interviene en actos de comunicación y de ejecución como embargos y subastas.",
   },
   {
-    title: "Tramitación de documentación y ejecuciones",
-    items: [
-      "Gestión de embargos, subastas y ejecución de sentencias.",
-      "Recepción, traslado y diligenciamiento de notificaciones, mandamientos y exhortos.",
-      "Tramitación de documentación ante registros y organismos públicos.",
-    ],
+    q: "¿Qué diferencia hay entre abogado y procurador?",
+    a: "El abogado se encarga de la defensa técnica: estudia el caso, redacta los escritos y defiende en el juicio. El procurador te representa ante el juzgado y gestiona el procedimiento. Ambos trabajan de forma coordinada en tu asunto.",
   },
   {
-    title: "Asesoramiento y coordinación",
-    items: [
-      "Orientación procesal para abogados y clientes.",
-      "Trabajo conjunto con abogados para una defensa integral.",
-      "Asesoramiento en la resolución alternativa de conflictos.",
-    ],
+    q: "¿Es obligatorio contratar un procurador?",
+    a: "En la mayoría de procedimientos civiles y penales, sí. La Ley de Enjuiciamiento Civil prevé algunas excepciones, como los juicios verbales de cuantía no superior a 2.000 euros o la petición inicial del proceso monitorio. Tu abogado o yo misma podemos confirmarte si tu caso lo requiere.",
+  },
+  {
+    q: "¿Cuánto cuesta un procurador?",
+    a: "Los derechos del procurador están regulados por un arancel oficial y dependen del tipo de procedimiento y de su cuantía. Cuéntame tu caso y te informo de lo que supondrá antes de empezar.",
+  },
+  {
+    q: "¿En qué provincias actúas?",
+    a: "Actúo en Córdoba capital y en toda su provincia, y también en Sevilla, Málaga, Jaén y Granada. Soy procuradora colegiada nº 367 del Ilustre Colegio de Procuradores de Córdoba.",
+  },
+  {
+    q: "¿Necesito un procurador en Córdoba si mi abogado es de otra ciudad?",
+    a: "Si el procedimiento se tramita en los juzgados de Córdoba, contar con una procuradora local agiliza las gestiones presenciales, las notificaciones y la coordinación con el juzgado. Me coordino con tu abogado esté donde esté.",
   },
 ];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: preguntas.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
+
+const eyebrow = "inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass-deep";
 ---
 
 <Layout
-  title="Áreas de trabajo · Procuradora en Córdoba · María José Carralero Medina"
-  description="Servicios de procura en Córdoba: representación procesal, presentación de escritos, control de plazos, embargos, subastas, ejecuciones y coordinación con abogados."
+  title="Servicios de procuradora en Córdoba · María José Carralero"
+  description="Servicios de procurador en Córdoba: representación procesal, escritos y plazos, embargos, subastas y ejecuciones, en coordinación con tu abogado."
 >
-  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <div class="mx-auto max-w-6xl px-4 pb-24 pt-10 sm:px-6 lg:px-8 lg:pt-16">
     <header class="max-w-3xl">
-      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">Procura integral</p>
-      <h1 class="mt-3 text-4xl font-semibold text-white sm:text-5xl">Áreas de trabajo</h1>
+      <h1>
+        <span class={eyebrow}>
+          <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+          Servicios de procuradora en Córdoba
+        </span>
+        <span class="mt-5 block font-serif text-5xl leading-[1.05] tracking-tight text-brand-ink sm:text-6xl">
+          Áreas de <em class="italic text-brand-brass-deep">trabajo</em>
+        </span>
+      </h1>
+      <p class="mt-7 text-pretty text-xl leading-relaxed text-brand-muted">
+        Soy María José Carralero, procuradora especializada en Derecho Procesal, y ofrezco un servicio de Procura
+        integral, proporcionando una gestión ágil y eficaz en todo tipo de procedimientos judiciales.
+      </p>
     </header>
 
-    <section class="mt-12 grid items-center gap-12 lg:grid-cols-2" aria-label="Presentación">
-      <div class="prose prose-invert prose-lg prose-p:text-white/85">
-        <p>
-          Soy María José Carralero, procuradora especializada en Derecho Procesal, y ofrezco un servicio de Procura
-          integral, proporcionando una gestión ágil y eficaz en todo tipo de procedimientos judiciales. Mi objetivo es
-          garantizar un trato directo y personalizado, representando a particulares, empresas y profesionales del
-          derecho con el máximo compromiso y profesionalidad.
-        </p>
-        <p>
-          Trabajo con las últimas tecnologías para optimizar cada trámite, agilizando la presentación y el seguimiento
-          de escritos, recursos y notificaciones. Gracias a estas herramientas, aseguro un control preciso de los plazos
-          procesales y una gestión eficiente adaptada a las necesidades actuales de la profesión.
-        </p>
-        <p>
-          Además, mantengo a mis clientes informados en todo momento sobre el estado de sus procedimientos, ofreciendo
-          un seguimiento continuo y avisos anticipados. De este modo, evito urgencias de última hora y garantizo que cada
-          trámite se realice con la planificación y el rigor que requiere el ejercicio de la Procura.
-        </p>
+    <section class="mt-16 grid items-center gap-12 lg:mt-20 lg:grid-cols-[1fr_1.1fr] lg:gap-20" aria-label="Presentación">
+      <div data-reveal class="relative mx-auto w-full max-w-md lg:mx-0">
+        <div
+          class="absolute inset-0 -translate-x-4 translate-y-4 rounded-3xl border border-brand-brass/60"
+          aria-hidden="true"
+        >
+        </div>
+        <Image
+          src={img}
+          alt="Procuradora firmando escritos judiciales sobre la mesa"
+          widths={[448, 896, 1040]}
+          sizes="(min-width: 640px) 448px, 90vw"
+          quality={85}
+          class="relative aspect-[4/5] w-full rounded-3xl object-cover shadow-[0_30px_60px_-20px_rgb(22_33_43/0.35)]"
+        />
       </div>
 
-      <Image
-        src={img}
-        alt="Procuradora firmando escritos judiciales sobre la mesa"
-        widths={[520, 1040, 1400]}
-        sizes="(min-width: 1024px) 520px, 100vw"
-        quality={85}
-        class="hidden aspect-[4/5] w-full rounded-md object-cover shadow-2xl ring-1 ring-white/10 lg:block"
-      />
-    </section>
-
-    <section class="mt-20" aria-labelledby="servicios">
-      <h2 id="servicios" class="text-3xl font-semibold text-white">Servicios</h2>
-      <div class="mt-6 h-px w-16 bg-brand-gold" aria-hidden="true"></div>
-
-      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {areas.map(({ title, items }) => (
-          <article class="rounded-md border border-white/10 bg-white/[0.06] p-6 lg:p-8">
-            <h3 class="text-xl font-semibold text-white">{title}</h3>
-            <ul class="mt-6 space-y-4">
-              {items.map((item) => (
-                <li class="flex gap-3 text-white/85">
-                  <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold" aria-hidden="true"></span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+      <div data-reveal style="--reveal-delay:100ms">
+        <div class="space-y-5 text-lg leading-relaxed text-brand-muted">
+          <p>
+            Mi objetivo es garantizar un trato directo y personalizado, representando a particulares, empresas y
+            profesionales del derecho con el máximo compromiso y profesionalidad.
+          </p>
+          <p>
+            Trabajo con las últimas tecnologías para optimizar cada trámite y asegurar un control preciso de los plazos
+            procesales. Además, mantengo a mis clientes informados en todo momento, evitando urgencias de última hora.
+          </p>
+        </div>
+        <ul class="mt-10 space-y-6 border-t border-brand-ink/10 pt-8">
+          {
+            compromisos.map(({ title, text }) => (
+              <li class="flex gap-4">
+                <span class="mt-2 h-2 w-2 shrink-0 rotate-45 bg-brand-brass" aria-hidden="true" />
+                <p>
+                  <span class="font-serif text-xl text-brand-ink">{title}.</span>{" "}
+                  <span class="text-brand-muted">{text}</span>
+                </p>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-    </section>
-
-    <section
-      class="mt-20 flex flex-col items-start justify-between gap-6 rounded-md border border-brand-gold/40 bg-brand-ink/60 p-8 md:flex-row md:items-center"
-      aria-labelledby="cta"
-    >
-      <div>
-        <h2 id="cta" class="text-2xl font-semibold text-white">¿Necesitas una procuradora en Córdoba?</h2>
-        <p class="mt-2 text-white/85">Cuéntame tu caso y te respondo a la mayor brevedad.</p>
-      </div>
-      <Button href="/contacto" class="shrink-0">Contactar</Button>
     </section>
   </div>
+
+  <section class="bg-brand-sand/70" aria-labelledby="servicios">
+    <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
+      <div data-reveal class="max-w-2xl">
+        <p class={eyebrow}>
+          <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+          Servicios
+        </p>
+        <h2 id="servicios" class="mt-5 text-balance font-serif text-4xl leading-tight text-brand-ink sm:text-5xl">
+          Todo lo que necesita tu procedimiento
+        </h2>
+      </div>
+
+      <ol class="mt-14 divide-y divide-brand-ink/10 border-y border-brand-ink/10">
+        {
+          servicios.map(({ slug, title, summary, items }, i) => (
+            <li id={slug} data-reveal class="scroll-mt-28 grid gap-6 py-10 lg:grid-cols-[5rem_1fr_1.3fr] lg:gap-10 lg:py-14">
+              <span aria-hidden="true" class="font-serif text-5xl italic leading-none text-brand-brass">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 class="font-serif text-3xl leading-tight text-brand-ink">{title}</h3>
+                <p class="mt-3 leading-relaxed text-brand-muted">{summary}</p>
+              </div>
+              <ul class="space-y-3">
+                {items.map((item) => (
+                  <li class="flex gap-4 rounded-2xl bg-brand-paper px-5 py-4 text-brand-ink ring-1 ring-brand-ink/5">
+                    <svg class="mt-1 shrink-0 text-brand-brass-deep" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 lg:py-28" aria-labelledby="preguntas">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
+      <div data-reveal>
+        <p class={eyebrow}>
+          <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+          Preguntas frecuentes
+        </p>
+        <h2 id="preguntas" class="mt-5 text-balance font-serif text-4xl leading-tight text-brand-ink sm:text-5xl">
+          Lo que debes saber sobre el procurador
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-brand-muted">
+          ¿Tienes otra duda? <a href="/contacto" class="font-semibold text-brand-ink underline decoration-brand-brass decoration-2 underline-offset-8">Escríbeme</a> y te la resuelvo.
+        </p>
+      </div>
+      <div data-reveal style="--reveal-delay:100ms" class="divide-y divide-brand-ink/10 border-y border-brand-ink/10">
+        {
+          preguntas.map(({ q, a }) => (
+            <details class="faq group py-6">
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-serif text-xl text-brand-ink">
+                <h3>{q}</h3>
+                <span class="faq-icon mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-brand-brass text-brand-brass-deep" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                </span>
+              </summary>
+              <p class="mt-4 max-w-2xl leading-relaxed text-brand-muted">{a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div>
+    <CtaBand />
+  </div>
 </Layout>
+
+<style>
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon svg {
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .faq[open] .faq-icon svg {
+    transform: rotate(45deg);
+  }
+</style>

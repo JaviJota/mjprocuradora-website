@@ -2,21 +2,24 @@
 import type { HTMLAttributes } from "astro/types";
 
 type Props = (HTMLAttributes<"a"> | HTMLAttributes<"button">) & {
-  variant?: "primary" | "secondary";
+  /** primary/secondary sobre fondos claros; brass/outline-light sobre fondos oscuros */
+  variant?: "primary" | "secondary" | "brass" | "outline-light";
   href?: string;
 };
 
 const { variant = "primary", href, class: className, ...rest } = Astro.props;
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-2.5 font-semibold " +
-  "transition-[background-color,border-color,color,transform] duration-150 ease-out active:scale-[0.97] " +
+  "inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold " +
+  "transition-[background-color,border-color,color,transform,box-shadow] duration-150 ease-out active:scale-[0.97] " +
   "disabled:pointer-events-none disabled:opacity-60";
 
-// Dorado + texto navy: contraste 4,9:1 (AA). Texto blanco sobre dorado no llega (2,3:1).
+// Texto blanco sobre latón no llega a AA: el latón siempre lleva texto tinta (5,8:1)
 const variants = {
-  primary: "bg-brand-gold text-brand-ink hover:bg-brand-gold-light active:bg-brand-gold-dark",
-  secondary: "border border-white/50 text-white hover:border-white hover:bg-white/10",
+  primary: "bg-brand-ink text-brand-cream shadow-sm hover:bg-brand-navy hover:shadow-md",
+  secondary: "border border-brand-ink/20 text-brand-ink hover:border-brand-ink/40 hover:bg-brand-ink/5",
+  brass: "bg-brand-brass text-brand-ink hover:bg-brand-brass-light",
+  "outline-light": "border border-brand-cream/30 text-brand-cream hover:border-brand-cream/60 hover:bg-white/10",
 };
 
 const classes = [base, variants[variant], className];

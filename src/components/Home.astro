@@ -2,99 +2,260 @@
 import Intro from "../assets/intro.md";
 import { Image } from "astro:assets";
 import portrait from "../assets/Maria-Jose-Carralero-Medina.webp";
-import hero from "../assets/fotos/palacio-justicia-columnas.jpg";
 import Button from "./Button.astro";
+import CtaBand from "./CtaBand.astro";
+import Phone from "../icons/Phone.astro";
+import MapPin from "../icons/MapPin.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+import { servicios } from "../data/servicios";
 
-const credentials = [
-  "Decana del Ilustre Colegio de Procuradores de Córdoba",
-  "Vicepresidenta del Consejo Andaluz de Procuradores",
-  "Licenciada en Derecho y diplomada en Criminología",
-  "Profesora del Máster de Abogacía y Procura",
+const trayectoria = [
+  { title: "Decana", text: "del Ilustre Colegio de Procuradores de Córdoba" },
+  { title: "Vicepresidenta", text: "del Consejo Andaluz de Procuradores" },
+  { title: "Licenciada en Derecho", text: "y diplomada en Criminología. Abogada colegiada no ejerciente" },
+  { title: "Docente", text: "en el Máster de Abogacía y Procura" },
 ];
+
+const destacados = [
+  { title: "Trato directo", text: "con particulares, empresas y abogados" },
+  { title: "Gestión telemática", text: "y control preciso de los plazos procesales" },
+];
+
+const pasos = [
+  { title: "Cuéntame tu caso", text: "Por teléfono, correo o formulario. Te atiendo personalmente, sin intermediarios." },
+  { title: "Estudio y planificación", text: "Revisamos el procedimiento, los plazos y la documentación que hace falta." },
+  { title: "Tramitación", text: "Presento escritos, recursos y notificaciones por vía telemática, con control preciso de plazos." },
+  { title: "Seguimiento continuo", text: "Te mantengo informado del estado del asunto y te aviso con antelación de cada paso." },
+];
+
+const eyebrow = "inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass-deep";
 ---
 
-<section
-  class="relative isolate flex min-h-[100svh] items-center overflow-hidden pb-24 pt-32"
-  aria-labelledby="hero-title"
->
-  <Image
-    src={hero}
-    alt=""
-    widths={[768, 1280, 1920, 2880]}
-    sizes="100vw"
-    quality={80}
-    loading="eager"
-    fetchpriority="high"
-    class="absolute inset-0 -z-20 h-full w-full object-cover"
-  />
-  <!-- Degradados: atenúan la foto, dan contraste al texto y la funden con el fondo de la página -->
-  <div class="absolute inset-0 -z-10 bg-brand-navy/70" aria-hidden="true"></div>
+<!-- Portada: texto + retrato en arco -->
+<section class="relative" aria-labelledby="hero-title">
   <div
-    class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgb(30_42_51/0.55),transparent_70%)]"
-    aria-hidden="true"
+    class="mx-auto grid max-w-6xl items-center gap-14 px-4 pb-20 pt-8 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-20 lg:px-8 lg:pb-28 lg:pt-12"
   >
-  </div>
-  <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-brand-ink/80 to-transparent" aria-hidden="true"></div>
-  <div class="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-brand-navy to-transparent" aria-hidden="true"></div>
-
-  <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
-    <h1 id="hero-title" class="text-balance">
-      <span class="block text-sm font-semibold uppercase tracking-[0.25em] text-brand-gold">
-        Procuradora en Córdoba
-      </span>
-      <span class="mt-5 block text-4xl font-extrabold leading-tight text-white sm:text-6xl">
-        Tu respaldo legal en cada paso del camino.
-      </span>
-    </h1>
-    <p class="mx-auto mt-6 max-w-xl text-pretty text-lg text-white/85">
-      Representación procesal y gestión de procedimientos judiciales en Córdoba y Andalucía, con trato directo y
-      seguimiento continuo de cada asunto.
-    </p>
-    <div class="mt-10 flex flex-wrap justify-center gap-4">
-      <Button href="/contacto">Solicita una consulta</Button>
-      <Button href="/areas-de-trabajo" variant="secondary">Áreas de trabajo</Button>
-    </div>
-  </div>
-
-  <a
-    href="#sobre-mi"
-    class="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
-  >
-    Conoce a María José
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-  </a>
-</section>
-
-<section class="mx-auto max-w-6xl scroll-mt-8 px-4 py-20 sm:px-6 lg:px-8" aria-labelledby="sobre-mi">
-  <div class="grid items-start gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
-    <div>
-      <h2 id="sobre-mi" class="text-3xl font-semibold text-white">María José Carralero Medina</h2>
-      <div class="mt-6 h-px w-16 bg-brand-gold" aria-hidden="true"></div>
-      <div class="prose prose-invert prose-lg mt-8 max-w-none prose-p:text-white/85">
-        <Intro />
+    <div class="hero-in">
+      <!-- La palabra clave principal ("Procuradora en Córdoba") va dentro del h1, con estilo de antetítulo -->
+      <h1 id="hero-title">
+        <span class={eyebrow}>
+          <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+          Procuradora en Córdoba
+        </span>
+        <span
+          class="mt-6 block text-balance font-serif text-[2.75rem] font-normal leading-[1.04] tracking-tight text-brand-ink sm:text-6xl lg:text-7xl"
+        >
+          Tu respaldo legal en cada paso <em class="italic text-brand-brass-deep">del camino</em>.
+        </span>
+      </h1>
+      <p class="mt-7 max-w-xl text-pretty text-lg leading-relaxed text-brand-muted">
+        Representación procesal y gestión de procedimientos judiciales en Córdoba y provincia, Sevilla, Málaga, Jaén y Granada, con trato directo y
+        seguimiento continuo de cada asunto.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <Button href="/contacto">
+          Solicita una consulta
+          <ArrowRight />
+        </Button>
+        <Button href="/areas-de-trabajo" variant="secondary">Áreas de trabajo</Button>
       </div>
+
+      <dl class="mt-14 hidden max-w-xl sm:grid grid-cols-2 gap-6 border-t border-brand-ink/10 pt-8">
+        {
+          destacados.map(({ title, text }) => (
+            <div>
+              <dt class="font-serif text-2xl text-brand-ink">{title}</dt>
+              <dd class="mt-1 text-sm leading-snug text-brand-muted">{text}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
 
-    <figure class="mx-auto w-full max-w-sm lg:sticky lg:top-8">
+    <div class="hero-in hero-in--late relative mx-auto w-full max-w-[19rem] sm:max-w-[26rem] lg:mr-0">
+      <!-- Marco de latón desplazado: da profundidad sin competir con la foto -->
+      <div
+        class="absolute inset-0 translate-x-4 translate-y-4 rounded-t-full rounded-b-3xl border border-brand-brass/60"
+        aria-hidden="true"
+      >
+      </div>
       <Image
         src={portrait}
         alt="Retrato de María José Carralero Medina, procuradora en Córdoba"
-        widths={[384, 768]}
-        sizes="(min-width: 1024px) 384px, 90vw"
-        class="aspect-[3/4] w-full rounded-md object-cover shadow-2xl ring-1 ring-white/10"
+        widths={[416, 832]}
+        sizes="(min-width: 1024px) 416px, (min-width: 640px) 416px, 90vw"
+        loading="eager"
+        fetchpriority="high"
+        class="relative aspect-[3/4] w-full rounded-t-full rounded-b-3xl object-cover shadow-[0_30px_60px_-20px_rgb(22_33_43/0.35)]"
       />
-      <figcaption class="mt-6">
-        <ul class="space-y-3">
-          {credentials.map((item) => (
-            <li class="flex gap-3 text-white/85">
-              <span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold" aria-hidden="true"></span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </figcaption>
-    </figure>
+      <div
+        class="absolute -left-4 bottom-8 flex items-center gap-3 rounded-2xl bg-brand-paper/95 px-4 py-3 shadow-lg ring-1 ring-brand-ink/5 backdrop-blur sm:-left-10"
+      >
+        <span class="grid h-10 w-10 place-items-center rounded-full bg-brand-sand">
+          <MapPin />
+        </span>
+        <span class="text-sm leading-tight">
+          <span class="block font-semibold text-brand-ink">Colegiada nº 367</span>
+          <span class="text-brand-muted">Córdoba, Sevilla, Málaga, Jaén y Granada</span>
+        </span>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- Trayectoria -->
+<section class="on-dark bg-brand-ink text-brand-cream" aria-labelledby="trayectoria">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <h2 id="trayectoria" class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass">Trayectoria</h2>
+    <ul class="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        trayectoria.map(({ title, text }, i) => (
+          <li data-reveal style={`--reveal-delay:${i * 70}ms`} class="border-t border-brand-brass/40 pt-6">
+            <p class="font-serif text-2xl text-brand-cream">{title}</p>
+            <p class="mt-2 leading-relaxed text-brand-cream/75">{text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- Sobre mí -->
+<section class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32" aria-labelledby="sobre-mi">
+  <div class="grid gap-12 lg:grid-cols-[1fr_1.35fr] lg:gap-20">
+    <div data-reveal class="lg:sticky lg:top-28 lg:self-start">
+      <p class={eyebrow}>
+        <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+        Sobre mí
+      </p>
+      <h2 id="sobre-mi" class="mt-5 text-balance font-serif text-4xl leading-tight text-brand-ink sm:text-5xl">
+        María José Carralero Medina
+      </h2>
+      <blockquote class="mt-8 border-l-2 border-brand-brass pl-6 font-serif text-2xl italic leading-snug text-brand-navy">
+        Comprometida con la defensa de los derechos e intereses de sus clientes, siempre con una visión ética, moderna
+        y profesional.
+      </blockquote>
+    </div>
+    <div data-reveal style="--reveal-delay:100ms" class="prose prose-lg prose-brand max-w-none">
+      <Intro />
+    </div>
+  </div>
+</section>
+
+<!-- Áreas de trabajo -->
+<section class="bg-brand-sand/70" aria-labelledby="areas">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div data-reveal>
+        <p class={eyebrow}>
+          <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+          Áreas de trabajo
+        </p>
+        <h2 id="areas" class="mt-5 max-w-xl text-balance font-serif text-4xl leading-tight text-brand-ink sm:text-5xl">
+          Procura integral, de principio a fin
+        </h2>
+      </div>
+      <a
+        href="/areas-de-trabajo"
+        class="group inline-flex items-center gap-2 font-semibold text-brand-ink underline decoration-brand-brass decoration-2 underline-offset-8"
+      >
+        Ver todas las áreas
+        <ArrowRight class="transition-transform duration-200 ease-out group-hover:translate-x-1" />
+      </a>
+    </div>
+
+    <ul class="mt-14 grid gap-6 md:grid-cols-3">
+      {
+        servicios.map(({ slug, title, summary }, i) => (
+          <li data-reveal style={`--reveal-delay:${i * 80}ms`}>
+            <a
+              href={`/areas-de-trabajo#${slug}`}
+              class="service-card group flex h-full flex-col rounded-3xl bg-brand-paper p-8 ring-1 ring-brand-ink/5"
+            >
+              <span aria-hidden="true" class="font-serif text-5xl italic text-brand-brass">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="mt-8 font-serif text-2xl leading-snug text-brand-ink">{title}</h3>
+              <p class="mt-4 flex-grow leading-relaxed text-brand-muted">{summary}</p>
+              <span class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-ink">
+                Saber más
+                <ArrowRight class="transition-transform duration-200 ease-out group-hover:translate-x-1" />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- Cómo trabajo -->
+<section class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32" aria-labelledby="como-trabajo">
+  <div data-reveal class="max-w-2xl">
+    <p class={eyebrow}>
+      <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+      Cómo trabajo
+    </p>
+    <h2 id="como-trabajo" class="mt-5 text-balance font-serif text-4xl leading-tight text-brand-ink sm:text-5xl">
+      Sin urgencias de última hora
+    </h2>
+    <p class="mt-5 text-lg leading-relaxed text-brand-muted">
+      Cada trámite se planifica con antelación y con el rigor que exige la Procura, para que tú solo tengas que
+      preocuparte de lo importante.
+    </p>
+  </div>
+
+  <ol class="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+    {
+      pasos.map(({ title, text }, i) => (
+        <li data-reveal style={`--reveal-delay:${i * 80}ms`} class="relative">
+          <div class="flex items-center gap-4">
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brand-brass font-serif text-lg text-brand-brass-deep">
+              {i + 1}
+            </span>
+            {i < pasos.length - 1 && <span class="hidden h-px flex-grow bg-brand-brass/40 lg:block" aria-hidden="true" />}
+          </div>
+          <h3 class="mt-6 font-serif text-xl text-brand-ink">{title}</h3>
+          <p class="mt-2 leading-relaxed text-brand-muted">{text}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p data-reveal class="mt-16 flex flex-wrap items-center gap-x-3 gap-y-2 text-brand-muted">
+    ¿Prefieres hablarlo directamente?
+    <a href="tel:+34687775744" class="inline-flex items-center gap-2 font-semibold text-brand-ink underline decoration-brand-brass decoration-2 underline-offset-8">
+      <Phone />
+      Llama al 687 775 744
+    </a>
+  </p>
+</section>
+
+<CtaBand />
+
+<style>
+  /* Entrada de la portada al cargar: el retrato llega un poco después que el texto */
+  .hero-in {
+    animation: hero-in 900ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .hero-in--late {
+    animation-delay: 120ms;
+  }
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  .service-card {
+    transition:
+      transform 250ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 250ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -24px rgb(22 33 43 / 0.25);
+    }
+  }
+</style>

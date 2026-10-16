@@ -1,5 +1,7 @@
 ---
 import "@fontsource-variable/onest"
+import "@fontsource-variable/fraunces/opsz.css"
+import "@fontsource-variable/fraunces/opsz-italic.css"
 import { getImage } from "astro:assets"
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro"
@@ -9,15 +11,12 @@ interface Props {
 	title: string;
 	description?: string;
 	noindex?: boolean;
-	/** La cabecera flota sobre el contenido (banner a pantalla completa en la home) */
-	overlayHeader?: boolean;
 }
 
 const {
 	title,
-	description = "María José Carralero Medina, procuradora en Córdoba y Andalucía con amplia trayectoria. Representación procesal, gestión de trámites judiciales y asesoramiento legal.",
+	description = "María José Carralero Medina, procuradora en Córdoba (colegiada nº 367) con amplia trayectoria. Representación procesal, gestión de trámites judiciales y asesoramiento legal.",
 	noindex = false,
-	overlayHeader = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -33,10 +32,10 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		{noindex && <meta name="robots" content="noindex" />}
-		<link rel="canonical" href={canonical} />
+		{!noindex && <link rel="canonical" href={canonical} />}
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="theme-color" content="#2A3B47" />
+		<meta name="theme-color" content="#F7F2EA" />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="es_ES" />
@@ -45,6 +44,9 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content={String(ogImage.attributes.width ?? 900)} />
+		<meta property="og:image:height" content={String(ogImage.attributes.height ?? 1200)} />
 		<meta property="og:image:alt" content="Retrato de María José Carralero Medina, procuradora en Córdoba" />
 
 		<meta name="twitter:card" content="summary_large_image" />
@@ -52,14 +54,17 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
 
+		<!-- Las animaciones de entrada solo se activan si hay JS: sin él, todo el contenido es visible -->
+		<script is:inline>document.documentElement.classList.add("js")</script>
+
 		<slot name="head" />
 	</head>
-	<body class="flex min-h-screen flex-col bg-brand-navy font-sans text-white antialiased">
+	<body class="flex min-h-screen flex-col bg-brand-cream font-sans text-brand-ink antialiased">
 		<a href="#contenido" class="skip-link">Saltar al contenido</a>
 
 		<div class="page-bg" aria-hidden="true"></div>
 
-		<Navbar overlay={overlayHeader} />
+		<Navbar />
 		<main id="contenido" tabindex="-1" class="flex-grow">
 			<slot />
 		</main>
@@ -67,50 +72,64 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 	</body>
 </html>
 
-<style is:global>
-	::-webkit-scrollbar {
-		width: 10px;
-	}
-	::-webkit-scrollbar-track {
-		background-color: #1e2a33;
-	}
-	::-webkit-scrollbar-thumb {
-		border-radius: 5px;
-		background-color: #4a5a66;
-	}
+<script>
+	// Revela los bloques marcados con data-reveal al entrar en pantalla (una sola vez)
+	const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
 
-	/* Fondo: azul profundo con luz dorada cálida arriba, luz fría abajo y grano sutil */
+	if ("IntersectionObserver" in window) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					entry.target.classList.add("is-visible");
+					observer.unobserve(entry.target);
+				}
+			},
+			{ rootMargin: "0px 0px -10% 0px" },
+		);
+		items.forEach((item) => observer.observe(item));
+	} else {
+		items.forEach((item) => item.classList.add("is-visible"));
+	}
+</script>
+
+<style is:global>
+	/* Fondo: crema cálido con un velo de luz dorada y grano de papel muy sutil */
 	.page-bg {
 		position: fixed;
 		inset: 0;
 		z-index: -10;
 		background:
-			radial-gradient(70% 55% at 10% -5%, rgb(191 167 106 / 0.16), transparent 70%),
-			radial-gradient(55% 45% at 100% 105%, rgb(120 156 180 / 0.12), transparent 70%),
-			linear-gradient(180deg, #2c3e4b 0%, #26353f 55%, #1f2c35 100%);
+			radial-gradient(60% 50% at 85% 0%, rgb(217 194 154 / 0.28), transparent 70%),
+			radial-gradient(50% 40% at 0% 100%, rgb(239 230 216 / 0.9), transparent 70%),
+			#f7f2ea;
 	}
 	.page-bg::after {
 		content: "";
 		position: absolute;
 		inset: 0;
-		opacity: 0.07;
-		mix-blend-mode: overlay;
+		opacity: 0.05;
+		mix-blend-mode: multiply;
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	}
 
 	html {
 		scroll-behavior: smooth;
+		scroll-padding-top: 6rem;
 	}
 
 	::selection {
-		background-color: #bfa76a;
-		color: #1e2a33;
+		background-color: #d9c29a;
+		color: #16212b;
 	}
 
 	:focus-visible {
-		outline: 2px solid #bfa76a;
+		outline: 2px solid #876631;
 		outline-offset: 3px;
 		border-radius: 4px;
+	}
+	.on-dark :focus-visible {
+		outline-color: #d9c29a;
 	}
 	main:focus {
 		outline: none;
@@ -123,13 +142,27 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 		z-index: 50;
 		padding: 0.75rem 1rem;
 		border-radius: 0.375rem;
-		background: #bfa76a;
-		color: #1e2a33;
+		background: #16212b;
+		color: #f7f2ea;
 		font-weight: 600;
 		transform: translateY(-200%);
 	}
 	.skip-link:focus {
 		transform: translateY(0);
+	}
+
+	/* Entrada al hacer scroll: --reveal-delay permite escalonar elementos hermanos */
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(16px);
+		transition:
+			opacity 700ms cubic-bezier(0.23, 1, 0.32, 1),
+			transform 700ms cubic-bezier(0.23, 1, 0.32, 1);
+		transition-delay: var(--reveal-delay, 0ms);
+	}
+	.js [data-reveal].is-visible {
+		opacity: 1;
+		transform: none;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -140,6 +173,9 @@ const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 			animation-iteration-count: 1 !important;
 			transition-duration: 0.01ms !important;
 			scroll-behavior: auto !important;
+		}
+		.js [data-reveal] {
+			transform: none;
 		}
 	}
 </style>
