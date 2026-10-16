@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import Button from "./Button.astro";
+import Phone from "../icons/Phone.astro";
+import columnas from "../assets/fotos/palacio-justicia-columnas.jpg";
+---
+
+<section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8" aria-labelledby="cta-title">
+  <div
+    data-reveal
+    class="on-dark relative isolate overflow-hidden rounded-[2rem] bg-brand-ink px-6 py-16 text-center sm:px-12 lg:py-20"
+  >
+    <Image
+      src={columnas}
+      alt=""
+      widths={[768, 1280, 1920]}
+      sizes="(min-width: 1152px) 1104px, 100vw"
+      quality={70}
+      class="absolute inset-0 -z-20 h-full w-full object-cover opacity-25 mix-blend-luminosity"
+    />
+    <div
+      class="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_50%_0%,rgb(184_149_90/0.25),transparent_70%)]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass">Hablemos</p>
+    <h2 id="cta-title" class="mx-auto mt-4 max-w-2xl text-balance font-serif text-4xl text-brand-cream sm:text-5xl">
+      ¿Necesitas una procuradora en Córdoba?
+    </h2>
+    <p class="mx-auto mt-5 max-w-xl text-pretty text-lg text-brand-cream/80">
+      Cuéntame tu caso y te respondo personalmente a la mayor brevedad.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <Button href="/contacto" variant="brass">Solicita una consulta</Button>
+      <Button href="tel:+34687775744" variant="outline-light">
+        <Phone class="text-brand-brass-light" />
+        +34 687 775 744
+      </Button>
+    </div>
+  </div>
+</section>

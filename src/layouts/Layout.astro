@@ -1,78 +1,181 @@
 ---
 import "@fontsource-variable/onest"
+import "@fontsource-variable/fraunces/opsz.css"
+import "@fontsource-variable/fraunces/opsz-italic.css"
+import { getImage } from "astro:assets"
 import Navbar from "../components/Navbar.astro"
 import Footer from "../components/Footer.astro"
+import portrait from "../assets/Maria-Jose-Carralero-Medina.webp"
 
 interface Props {
-  title: string;
+	title: string;
+	description?: string;
+	noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = "María José Carralero Medina, procuradora en Córdoba (colegiada nº 367) con amplia trayectoria. Representación procesal, gestión de trámites judiciales y asesoramiento legal.",
+	noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = await getImage({ src: portrait, width: 900, format: "jpeg" });
+const ogImageUrl = new URL(ogImage.src, Astro.site).href;
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="canonical" href="https://www.procuradoracordoba.com/">
-		<link rel="sitemap" href="/sitemap-index.xml" />
-
-		<meta name="viewport" content="width=device-width" />
-
-		<meta property="og:title" content="María José Carralero Medina - Procuradora en Córdoba y Andalucía">
-		<meta property="og:description" content="Representación procesal, gestión de trámites judiciales y asesoramiento legal en Córdoba y Andalucía.">
-		<!-- <meta property="og:image" content="https://www.procuradoracordoba.com/assets/IMG_0931-Cama4KKt.webp"> -->
-		<meta property="og:url" content="https://www.procuradoracordoba.com/">
-		<meta property="og:type" content="website">
-
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="María José Carralero Medina - Procuradora en Córdoba y Andalucía">
-		<meta name="twitter:description" content="María José Carralero Medina, procuradora en Córdoba y Andalucía con amplia trayectoria. Representación procesal, gestión de trámites judiciales y asesoramiento legal.">
-		<!-- <meta name="twitter:image" content="https://www.procuradoracordoba.com/assets/IMG_0931-Cama4KKt.webp"> -->
-
-		<meta name="description" content="María José Carralero Medina, procuradora en Córdoba y Andalucía con amplia trayectoria. Representación procesal, gestión de trámites judiciales y asesoramiento legal.">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex" />}
+		{!noindex && <link rel="canonical" href={canonical} />}
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<meta name="theme-color" content="#F7F2EA" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:site_name" content="María José Carralero Medina · Procuradora" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content={String(ogImage.attributes.width ?? 900)} />
+		<meta property="og:image:height" content={String(ogImage.attributes.height ?? 1200)} />
+		<meta property="og:image:alt" content="Retrato de María José Carralero Medina, procuradora en Córdoba" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
+		<!-- Las animaciones de entrada solo se activan si hay JS: sin él, todo el contenido es visible -->
+		<script is:inline>document.documentElement.classList.add("js")</script>
+
+		<slot name="head" />
 	</head>
-	<body class="flex flex-col min-h-screen">
-		<div class="fixed left-0 top-0 -z-10 h-full w-full">
-			<div class="relative h-full w-full bg-[#2A3B47]">
-			  <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#bfa76a2e_1px,transparent_1px),linear-gradient(to_bottom,#a0a0a00a_1px,transparent_1px)] bg-[size:14px_24px]"></div> 
-			  <div class="absolute left-0 right-0 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#ffffff1a,#2A3B47)]"></div>
-			</div>
-		</div>
+	<body class="flex min-h-screen flex-col bg-brand-cream font-sans text-brand-ink antialiased">
+		<a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+		<div class="page-bg" aria-hidden="true"></div>
+
 		<Navbar />
-		<main class="flex-grow">
+		<main id="contenido" tabindex="-1" class="flex-grow">
 			<slot />
 		</main>
-		<hr class="opacity-5 mt-auto">
 		<Footer />
 	</body>
 </html>
 
+<script>
+	// Revela los bloques marcados con data-reveal al entrar en pantalla (una sola vez)
+	const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
+
+	if ("IntersectionObserver" in window) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					entry.target.classList.add("is-visible");
+					observer.unobserve(entry.target);
+				}
+			},
+			{ rootMargin: "0px 0px -10% 0px" },
+		);
+		items.forEach((item) => observer.observe(item));
+	} else {
+		items.forEach((item) => item.classList.add("is-visible"));
+	}
+</script>
+
 <style is:global>
-	:root {
-    caret-color: transparent;
+	/* Fondo: crema cálido con un velo de luz dorada y grano de papel muy sutil */
+	.page-bg {
+		position: fixed;
+		inset: 0;
+		z-index: -10;
+		background:
+			radial-gradient(60% 50% at 85% 0%, rgb(217 194 154 / 0.28), transparent 70%),
+			radial-gradient(50% 40% at 0% 100%, rgb(239 230 216 / 0.9), transparent 70%),
+			#f7f2ea;
 	}
-	::-webkit-scrollbar {
-		width: 10px;
-	}
-
-	::-webkit-scrollbar-track{
-		background-color: #141314;
-	}
-
-	::-webkit-scrollbar-thumb{
-		border-radius: 5px;
-		background-color: #494950;
-	}
-	html,
-	body {
-		margin: 0;
-		font-family: "Onest Variable", sans-serif;
+	.page-bg::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		opacity: 0.05;
+		mix-blend-mode: multiply;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	}
 
-	.flex-grow {
-		flex-grow: 1;
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 6rem;
+	}
+
+	::selection {
+		background-color: #d9c29a;
+		color: #16212b;
+	}
+
+	:focus-visible {
+		outline: 2px solid #876631;
+		outline-offset: 3px;
+		border-radius: 4px;
+	}
+	.on-dark :focus-visible {
+		outline-color: #d9c29a;
+	}
+	main:focus {
+		outline: none;
+	}
+
+	.skip-link {
+		position: absolute;
+		left: 1rem;
+		top: 1rem;
+		z-index: 50;
+		padding: 0.75rem 1rem;
+		border-radius: 0.375rem;
+		background: #16212b;
+		color: #f7f2ea;
+		font-weight: 600;
+		transform: translateY(-200%);
+	}
+	.skip-link:focus {
+		transform: translateY(0);
+	}
+
+	/* Entrada al hacer scroll: --reveal-delay permite escalonar elementos hermanos */
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(16px);
+		transition:
+			opacity 700ms cubic-bezier(0.23, 1, 0.32, 1),
+			transform 700ms cubic-bezier(0.23, 1, 0.32, 1);
+		transition-delay: var(--reveal-delay, 0ms);
+	}
+	.js [data-reveal].is-visible {
+		opacity: 1;
+		transform: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+		.js [data-reveal] {
+			transform: none;
+		}
 	}
 </style>

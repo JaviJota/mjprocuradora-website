@@ -1,25 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
 ---
 
-<Layout title="Página no encontrada - Procuradora Córdoba - María José Carralero Medina">
-    <main class="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
-        <div class="text-center">
-          <p class="text-base font-semibold text-gray-300">404</p>
-          <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-200 sm:text-7xl">Página no encontrada</h1>
-          <p class="mt-6 text-lg font-medium text-pretty text-gray-300 sm:text-xl/8">Lo sentimos, no pudimos encontrar la página que buscas.</p>
-          <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a 
-              href="/" 
-              class="
-                font-semibold text-sm text-white lg:text-base 
-                px-4 py-2 lg:px-5 lg:py-3 mt-4 w-full rounded-md transition 
-                bg-[#2A3B47] drop-shadow-md hover:bg-[#bfa76a] 
-                hover:scale-105 active:bg-[#a18550] border border-white/50"
-            >
-              Ir al inicio
-            </a>
-          </div>
-        </div>
-      </main>
+<Layout title="Página no encontrada · María José Carralero Medina" noindex>
+  <div class="grid place-items-center px-6 py-24 text-center sm:py-32">
+    <p class="font-serif text-8xl italic text-brand-brass-deep">404</p>
+    <h1 class="mt-4 text-balance font-serif text-5xl tracking-tight text-brand-ink sm:text-6xl">Página no encontrada</h1>
+    <p class="mt-6 text-pretty text-lg text-brand-muted">Lo sentimos, no pudimos encontrar la página que buscas.</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <Button href="/">Ir al inicio</Button>
+      <Button href="/contacto" variant="secondary">Contacto</Button>
+    </div>
+  </div>
 </Layout>

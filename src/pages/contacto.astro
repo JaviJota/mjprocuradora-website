@@ -1,91 +1,223 @@
 ---
 import Mail from "../icons/Mail.astro";
 import Phone from "../icons/Phone.astro";
+import MapPin from "../icons/MapPin.astro";
 import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import ArrowRight from "../icons/ArrowRight.astro";
+import { Image } from "astro:assets";
+import portrait from "../assets/Maria-Jose-Carralero-Medina.webp";
+
+const input =
+  "mt-2 block w-full rounded-xl border border-brand-ink/15 bg-brand-cream/60 px-4 py-3 text-brand-ink " +
+  "transition-[border-color,background-color,box-shadow] duration-150 placeholder:text-brand-muted/70 " +
+  "hover:border-brand-ink/30 focus:border-brand-brass focus:bg-brand-paper focus:outline-none focus:ring-4 focus:ring-brand-brass/20";
+const label = "block text-sm font-semibold text-brand-ink";
+const eyebrow = "inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass-deep";
 ---
 
-<Layout title="Contacto - Procuradora Córdoba - María José Carralero Medina">
-    <main class="mb-10">
-        <h1 class="mt-10 lg:ml-32 text-4xl text-gray-200 font-semibold text-center lg:text-left">Contacto</h1>
-        <hr class="opacity-20 mt-4 mx-auto lg:ml-32 w-3/4 hidden lg:block">
-        <section class="grid grid-cols-1 lg:grid-cols-2 w-3/4 mx-auto mt-16">
-            <div class="mb-8 lg:mb-0">
-                <h1 class="text-2xl text-white font-semibold text-center lg:text-left">Datos de contacto</h1>
-                <ul class="mt-5">
-                    <li class="flex items-center justify-center lg:justify-start mb-3">
-                        <Mail />
-                        <p class="text-white ml-3">mjcarralero@cordoba.cgpe.net</p>
-                    </li>
-                    <li class="flex items-center justify-center lg:justify-start mb-3">
-                        <Phone />
-                        <p class="text-white ml-3">+34 687 775 744</p>
-                    </li>
-                </ul>
+<Layout
+  title="Contacto · Procuradora en Córdoba · María José Carralero"
+  description="Contacta con María José Carralero, procuradora en Córdoba: teléfono 687 775 744, correo electrónico o formulario. Te respondo personalmente."
+>
+  <div class="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6 lg:px-8 lg:pt-16">
+    <header class="max-w-3xl">
+      <p class={eyebrow}>
+        <span class="h-px w-8 bg-brand-brass" aria-hidden="true"></span>
+        Hablemos de tu caso
+      </p>
+      <h1 class="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-brand-ink sm:text-6xl">Contacto</h1>
+      <p class="mt-6 max-w-xl text-pretty text-xl leading-relaxed text-brand-muted">
+        Cuéntame qué necesitas y te responderé personalmente a la mayor brevedad.
+      </p>
+    </header>
+
+    <div class="mt-14 grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-10">
+      <section
+        aria-labelledby="datos"
+        class="on-dark relative isolate flex flex-col overflow-hidden rounded-[2rem] bg-brand-ink p-8 text-brand-cream sm:p-10"
+      >
+        <div
+          class="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(184_149_90/0.35),transparent_70%)]"
+          aria-hidden="true"
+        >
+        </div>
+        <h2 id="datos" class="font-serif text-3xl">Datos de contacto</h2>
+        <p class="mt-3 text-brand-cream/75">Si lo prefieres, llámame o escríbeme directamente.</p>
+
+        <address class="mt-10 not-italic">
+          <ul class="space-y-8">
+            <li>
+              <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-brass">
+                <Phone class="text-brand-brass" /> Teléfono
+              </p>
+              <a
+                class="mt-2 inline-block font-serif text-3xl text-brand-cream underline decoration-brand-brass/50 underline-offset-8 transition-colors hover:decoration-brand-brass"
+                href="tel:+34687775744">687 775 744</a
+              >
+            </li>
+            <li>
+              <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-brass">
+                <Mail class="text-brand-brass" /> Correo electrónico
+              </p>
+              <a
+                class="mt-2 inline-block break-all text-lg text-brand-cream underline decoration-brand-brass/50 underline-offset-8 transition-colors hover:decoration-brand-brass"
+                href="mailto:mjcarralero@cordoba.cgpe.net">mjcarralero@cordoba.cgpe.net</a
+              >
+            </li>
+            <li>
+              <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-brass">
+                <MapPin class="text-brand-brass" /> Ámbito
+              </p>
+              <p class="mt-2 text-lg text-brand-cream">Córdoba y provincia, Sevilla, Málaga, Jaén y Granada</p>
+            </li>
+          </ul>
+        </address>
+
+        <div class="mt-12 flex items-center gap-4 border-t border-white/10 pt-8 lg:mt-auto">
+          <!-- El retrato es de cuerpo entero: se amplía y se encuadra sobre la cara -->
+          <div class="h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-brand-brass/60">
+            <Image
+              src={portrait}
+              alt=""
+              widths={[160, 320]}
+              sizes="160px"
+              class="h-full w-full origin-[50%_22%] scale-[2.3] object-cover object-[50%_22%]"
+            />
+          </div>
+          <p class="leading-tight">
+            <span class="block font-serif text-lg">María José Carralero Medina</span>
+            <span class="text-sm text-brand-cream/70">Procuradora de los Tribunales</span>
+          </p>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="formulario"
+        class="rounded-[2rem] bg-brand-paper p-6 shadow-[0_30px_60px_-30px_rgb(22_33_43/0.25)] ring-1 ring-brand-ink/5 sm:p-10"
+      >
+        <h2 id="formulario" class="font-serif text-3xl text-brand-ink">Escríbeme</h2>
+        <p class="mt-2 text-sm text-brand-muted">Todos los campos son obligatorios.</p>
+
+        <form id="contact-form" class="mt-8 space-y-6" novalidate>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label class={label} for="nombre">Nombre</label>
+              <input class={input} type="text" name="nombre" id="nombre" autocomplete="given-name" required />
             </div>
-            
-            <div class="lg:border-l border-gray-500 lg:pl-10">
-                <h2 class="text-2xl text-white font-semibold text-center lg:text-left lg:ml-5 mb-4">Formulario de contacto</h2>
-                <form id="contact-form" class="mx-5" action="">
-                    
-                    <fieldset class="flex flex-col lg:flex-row mb-4">
-                        <div class="flex flex-col w-full mb-4 lg:mr-5 lg:mb-0">
-                            <input class="rounded-md px-2 py-1 w-full" type="text" name="nombre" id="nombre" required/>
-                            <label class="text-white text-sm mt-1" for="">Nombre</label>
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <input class="rounded-md px-2 py-1 w-full" type="text" name="apellido" id="apellido" required/>
-                            <label class="text-white text-sm mt-1" for="">Apellidos</label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="flex flex-col mb-4">
-                        <input class="rounded-md px-2 py-1 lg:w-3/4" type="email" name="email" id="email" required/>
-                        <label class="text-white text-sm mt-1" for="">Correo electrónico</label>
-                    </fieldset>
-
-                    <fieldset class="flex flex-col mb-4">
-                        <input class="rounded-md px-2 py-1 lg:w-2/3" type="text" name="teléfono" id="teléfono" required/>
-                        <label class="text-white text-sm mt-1" for="">Número de teléfono</label>
-                    </fieldset>
-
-                    <fieldset class="flex flex-col">
-                        <textarea class="rounded-md px-2 py-1 min-h-32" name="descripción" id="descripción" required/>
-                        <label class="text-white text-sm mt-1" for="">Descripción</label>
-                    </fieldset>
-
-                    <button 
-                        type="submit" 
-                        class="
-                            font-semibold text-sm text-white lg:text-base 
-                            px-4 py-2 lg:px-5 lg:py-3 mt-4 w-full rounded-md transition 
-                            bg-[#2A3B47] drop-shadow-md hover:bg-[#bfa76a] 
-                            hover:scale-105 active:bg-[#a18550] border border-white/50"
-                    >
-                        Enviar
-                    </button>
-                </form>
+            <div>
+              <label class={label} for="apellido">Apellidos</label>
+              <input class={input} type="text" name="apellido" id="apellido" autocomplete="family-name" required />
             </div>
+          </div>
 
-        </section>
-    </main>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label class={label} for="email">Correo electrónico</label>
+              <input class={input} type="email" name="email" id="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label class={label} for="telefono">Teléfono</label>
+              <input
+                class={input}
+                type="tel"
+                name="teléfono"
+                id="telefono"
+                autocomplete="tel"
+                inputmode="tel"
+                minlength="9"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class={label} for="descripcion">¿En qué puedo ayudarte?</label>
+            <textarea class:list={[input, "min-h-36"]} name="descripción" id="descripcion" rows="5" required></textarea>
+          </div>
+
+          <div class="flex gap-3">
+            <input
+              class="mt-0.5 h-5 w-5 shrink-0 accent-brand-ink"
+              type="checkbox"
+              id="privacidad"
+              name="privacidad"
+              required
+            />
+            <label for="privacidad" class="text-sm text-brand-muted">
+              He leído y acepto la <a
+                href="/politica-de-privacidad"
+                class="font-medium text-brand-ink underline decoration-brand-brass underline-offset-4">política de privacidad</a
+              >.
+            </label>
+          </div>
+
+          <p id="form-status" role="status" aria-live="polite" class="min-h-6 text-sm font-medium"></p>
+
+          <Button type="submit" class="w-full sm:w-auto">
+            Enviar mensaje
+            <ArrowRight />
+          </Button>
+        </form>
+      </section>
+    </div>
+  </div>
 </Layout>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact-form") as HTMLFormElement;
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
 
-    if (form) {
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const formData = new FormData(form);
+  const setStatus = (message: string, type: "ok" | "error" | "") => {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("text-emerald-700", type === "ok");
+    status.classList.toggle("text-red-700", type === "error");
+  };
 
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                body: formData
-            });
-            const result = await response.json();
-            location.reload()
-        });
-    }
-});
+  if (form) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea"));
+      fields.forEach((field) => field.setAttribute("aria-invalid", String(!field.checkValidity())));
+
+      const firstInvalid = fields.find((field) => !field.checkValidity());
+      if (firstInvalid) {
+        setStatus("Revisa los campos marcados: todos son obligatorios.", "error");
+        firstInvalid.focus();
+        return;
+      }
+
+      const submit = form.querySelector<HTMLButtonElement>("button[type=submit]");
+      if (submit) submit.disabled = true;
+      setStatus("Enviando…", "");
+
+      try {
+        const response = await fetch("/api/contact", { method: "POST", body: new FormData(form) });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          setStatus(result.error ?? "No se pudo enviar el mensaje. Inténtalo de nuevo o llama por teléfono.", "error");
+          return;
+        }
+
+        form.reset();
+        fields.forEach((field) => field.removeAttribute("aria-invalid"));
+        setStatus("¡Mensaje enviado! Te responderé a la mayor brevedad.", "ok");
+      } catch {
+        setStatus("No se pudo enviar el mensaje. Comprueba tu conexión o llama por teléfono.", "error");
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
+  }
 </script>
+
+<style>
+  input[aria-invalid="true"],
+  textarea[aria-invalid="true"] {
+    border-color: #b91c1c;
+    box-shadow: 0 0 0 3px rgb(185 28 28 / 0.15);
+  }
+</style>

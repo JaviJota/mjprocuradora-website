@@ -1,8 +1,84 @@
 ---
 import Home from '../components/Home.astro';
 import Layout from '../layouts/Layout.astro';
+import { getImage } from 'astro:assets';
+import portrait from '../assets/Maria-Jose-Carralero-Medina.webp';
+import logoSvg from '../assets/mj-logo-oscuro.svg';
+
+const site = "https://www.procuradoraencordoba.es";
+const ogImage = await getImage({ src: portrait, width: 900, format: "jpeg" });
+const logo = await getImage({ src: logoSvg });
+
+const schema = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": `${site}/#web`,
+			url: `${site}/`,
+			name: "María José Carralero Medina · Procuradora en Córdoba",
+			inLanguage: "es-ES",
+			publisher: { "@id": `${site}/#negocio` },
+		},
+		{
+			"@type": "LegalService",
+			"@id": `${site}/#negocio`,
+			name: "María José Carralero Medina · Procuradora en Córdoba",
+			description:
+				"Procuradora de los Tribunales en Córdoba. Representación procesal, presentación de escritos y control de plazos, embargos, subastas y ejecuciones, en coordinación con abogados.",
+			url: `${site}/`,
+			image: new URL(ogImage.src, site).href,
+			logo: new URL(logo.src, site).href,
+			telephone: "+34687775744",
+			email: "mjcarralero@cordoba.cgpe.net",
+			// Sin despacho físico: se declara zona de servicio, no dirección postal
+			areaServed: [
+				{ "@type": "City", name: "Córdoba" },
+				{ "@type": "AdministrativeArea", name: "Provincia de Córdoba" },
+				{ "@type": "City", name: "Sevilla" },
+				{ "@type": "City", name: "Málaga" },
+				{ "@type": "City", name: "Jaén" },
+				{ "@type": "City", name: "Granada" },
+			],
+			knowsAbout: [
+				"Representación procesal",
+				"Derecho procesal",
+				"Embargos y subastas judiciales",
+				"Ejecución de sentencias",
+				"Actos de comunicación procesal",
+			],
+			founder: { "@id": `${site}/#persona` },
+		},
+		{
+			"@type": "Person",
+			"@id": `${site}/#persona`,
+			name: "María José Carralero Medina",
+			jobTitle: "Procuradora de los Tribunales",
+			identifier: {
+				"@type": "PropertyValue",
+				name: "Número de colegiada (Ilustre Colegio de Procuradores de Córdoba)",
+				value: "367",
+			},
+			image: new URL(ogImage.src, site).href,
+			worksFor: { "@id": `${site}/#negocio` },
+			hasOccupation: {
+				"@type": "Occupation",
+				name: "Procuradora de los Tribunales",
+				occupationLocation: { "@type": "City", name: "Córdoba" },
+			},
+			memberOf: [
+				{ "@type": "Organization", name: "Ilustre Colegio de Procuradores de Córdoba" },
+				{ "@type": "Organization", name: "Consejo Andaluz de Procuradores" },
+			],
+		},
+	],
+};
 ---
 
-<Layout title="Procuradora Córdoba - María José Carralero Medina">
+<Layout
+	title="Procuradora en Córdoba · María José Carralero Medina"
+	description="María José Carralero Medina, procuradora en Córdoba. Representación procesal, escritos, plazos, embargos y ejecuciones con trato directo. Llama al 687 775 744."
+>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
 	<Home />
 </Layout>

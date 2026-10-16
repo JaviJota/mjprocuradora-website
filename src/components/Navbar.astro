@@ -1,72 +1,159 @@
 ---
 import Menu from "../icons/Menu.astro"
+import Phone from "../icons/Phone.astro"
 import { Image } from "astro:assets"
-import img from "../assets/mj-logo-blanco-02.svg"
+import logo from "../assets/mj-logo-oscuro.svg"
+
+const links = [
+  { href: "/", label: "Inicio" },
+  { href: "/areas-de-trabajo", label: "Áreas de trabajo" },
+  // { href: "/recursos", label: "Recursos" },
+  { href: "/contacto", label: "Contacto" },
+];
+
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
-<nav>
-    <div class="flex flex-col">
-        <div class="flex align-center py-2">
-        <!-- Logotipo -->
-         <div class="ml-4 lg:ml-20">
-          <a href="/">
-            <Image src={img} alt="Logotipo MJ Procuradora" class="h-20 w-auto ml-4 lg:ml-20"/>
+<header id="site-header" data-scrolled="false" class="site-header sticky top-0 z-30">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
+    <a href="/" class="shrink-0">
+      <Image src={logo} alt="María José Carralero Medina, procuradora · Inicio" class="h-12 w-auto lg:h-14" loading="eager" />
+    </a>
+
+    <nav aria-label="Principal" class="hidden md:block">
+      <ul class="flex items-center gap-8">
+        {links.map(({ href, label }) => (
+          <li>
+            <a href={href} aria-current={current === href ? "page" : undefined} class="nav-link font-medium text-brand-ink">
+              {label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a
+            href="tel:+34687775744"
+            class="inline-flex min-h-11 items-center gap-2 rounded-full bg-brand-ink px-5 font-semibold text-brand-cream transition-[background-color,transform] duration-150 ease-out hover:bg-brand-navy active:scale-[0.97]"
+          >
+            <Phone class="text-brand-brass-light" />
+            687 775 744
           </a>
-         </div>
+        </li>
+      </ul>
+    </nav>
 
-            <!-- Toggle Menu -->
-            <button
-            class="mr-8 lg:mr-20 flex flex-1 md:hidden items-center justify-end">
-              <span id="menu-toggle">
-                <Menu />
-              </span>
-            </button>
+    <button
+      id="menu-toggle"
+      type="button"
+      class="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-ink md:hidden"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <Menu />
+    </button>
+  </div>
 
-            <!-- LG Menu -->
-            <div class="mr-20 hidden md:flex flex-1 gap-8 items-center justify-end">
-                <a class="text-lg text-white font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/">Inicio</a>
-                <a class="text-lg text-white font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/areas-de-trabajo">Áreas de trabajo</a>
-                <!-- <a class="text-lg text-white font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/recursos">Recursos</a> -->
-                <a class="text-lg text-white font-semibold px-2 py-1 transition-all hover:border-b-2 hover:scale-105" href="/contacto">Contacto</a>
-            </div>
-        </div>
-
-        <!-- XS Menu -->
-          <div class="relative flex w-screen justify-end">
-            <div id="menu" class="not-visible gap-2 w-screen ml-auto rounded-b-md flex flex-col items-center absolute top-0 z-10 bg-white md:hidden">
-                <a class="text-slate-900 pt-4 font-bold" href="/">Inicio</a>
-                <a class="text-slate-900 pt-1 font-bold" href="/areas-de-trabajo">Áreas de trabajo</a>
-                <!-- <a class="text-slate-900 pt-1 font-bold" href="/recursos">Recursos</a> -->
-                <a class="text-slate-900 pt-1 pb-4 font-bold" href="/contacto">Contacto</a>
-            </div>
-          </div>
-    </div>
-</nav>
+  <nav
+    id="mobile-menu"
+    aria-label="Principal"
+    data-open="false"
+    class="mobile-menu absolute inset-x-0 top-full border-y border-brand-ink/10 bg-brand-paper shadow-xl md:hidden"
+  >
+    <ul class="flex flex-col px-4 py-3">
+      {links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            aria-current={current === href ? "page" : undefined}
+            class="block py-3 font-serif text-2xl text-brand-ink aria-[current=page]:text-brand-brass-deep"
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+      <li class="mt-2 border-t border-brand-ink/10 pt-4">
+        <a href="tel:+34687775744" class="inline-flex items-center gap-3 py-2 font-semibold text-brand-ink">
+          <Phone />
+          +34 687 775 744
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("menu");
-    
-    if (menuToggle && menu !== null) {
-      menuToggle.addEventListener("click", () => {
-        menu.classList.toggle("visible");
-        menu.classList.toggle("not-visible");
-      });
-    }
-  });
+  const header = document.getElementById("site-header");
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  if (header) {
+    const update = () => (header.dataset.scrolled = String(window.scrollY > 8));
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      menu.dataset.open = String(open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    };
+
+    toggle.addEventListener("click", () => setOpen(menu.dataset.open !== "true"));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.dataset.open === "true") {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
 </script>
 
 <style>
-    .not-visible {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-in-out;
-    }
-  
-    .visible {
-      max-height: 350px;
-      overflow: hidden;
-      transition: max-height 0.3s ease-in-out;
-    }
-  </style>
+  /* Transparente arriba del todo; al hacer scroll gana fondo translúcido y una línea inferior */
+  .site-header {
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+  .site-header[data-scrolled="true"] {
+    background-color: rgb(247 242 234 / 0.85);
+    border-color: rgb(22 33 43 / 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Subrayado de latón: no desplaza el layout */
+  .nav-link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 8px;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 150ms ease;
+  }
+  .nav-link:hover {
+    text-decoration-color: rgb(22 33 43 / 0.3);
+  }
+  .nav-link[aria-current="page"] {
+    text-decoration-color: #b8955a;
+  }
+
+  /* visibility evita que los enlaces ocultos reciban foco con el teclado */
+  .mobile-menu {
+    opacity: 0;
+    transform: translateY(-8px);
+    visibility: hidden;
+    transition:
+      opacity 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      visibility 0s linear 200ms;
+  }
+  .mobile-menu[data-open="true"] {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+</style>
