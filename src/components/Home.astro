@@ -16,9 +16,26 @@ const trayectoria = [
   { title: "Docente", text: "en el Máster de Abogacía y Procura" },
 ];
 
+// Fecha de ingreso según su ficha oficial en el Colegio (16/05/2001)
 const destacados = [
+  { title: "Desde 2001", text: "más de 25 años ejerciendo la Procura en Córdoba" },
   { title: "Trato directo", text: "con particulares, empresas y abogados" },
-  { title: "Gestión telemática", text: "y control preciso de los plazos procesales" },
+];
+
+// Presencia pública enlazable. La entrevista de ABC (jun. 2024) se excluye a propósito: generó polémica.
+const presencia = [
+  {
+    href: "https://www.youtube.com/watch?v=NQ8PBll4S4E",
+    medio: "Onda Mezquita TV · mayo de 2020",
+    title: "Entrevista en «Córdoba Ahora» como decana del Colegio de Procuradores",
+    icon: "video",
+  },
+  {
+    href: "https://www.procucordoba.org/Colegiados/COL_CARRALERO_MEDINA_MARIA_JOSE.html",
+    medio: "Ilustre Colegio de Procuradores de Córdoba",
+    title: "Ficha oficial de colegiada nº 367, en ejercicio desde 2001",
+    icon: "doc",
+  },
 ];
 
 const pasos = [
@@ -136,6 +153,37 @@ const eyebrow = "inline-flex items-center gap-3 text-sm font-semibold uppercase 
         Comprometida con la defensa de los derechos e intereses de sus clientes, siempre con una visión ética, moderna
         y profesional.
       </blockquote>
+
+      <h3 class="mt-12 text-sm font-semibold uppercase tracking-[0.2em] text-brand-brass-deep">En los medios y en el Colegio</h3>
+      <ul class="mt-5 space-y-3">
+        {
+          presencia.map(({ href, medio, title, icon }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener"
+                class="group flex items-start gap-4 rounded-2xl bg-brand-paper p-4 ring-1 ring-brand-ink/5 transition-shadow duration-200 hover:shadow-md"
+              >
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-sand text-brand-brass-deep" aria-hidden="true">
+                  {icon === "video" ? (
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5v9l7.5-4.5L5 3.5Z" /></svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 1.75h5.5L12.5 5v9.25h-8.5V1.75Z" /><path d="M6.5 8.5h4M6.5 11h4" stroke-linecap="round" /></svg>
+                  )}
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-xs font-semibold uppercase tracking-[0.12em] text-brand-muted">{medio}</span>
+                  <span class="mt-1 block font-medium leading-snug text-brand-ink underline decoration-transparent decoration-brand-brass underline-offset-4 transition-colors group-hover:decoration-brand-brass">
+                    {title}
+                  </span>
+                  <span class="sr-only"> (se abre en una pestaña nueva)</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
     <div data-reveal style="--reveal-delay:100ms" class="prose prose-lg prose-brand max-w-none">
       <Intro />

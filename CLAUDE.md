@@ -35,3 +35,5 @@ Tailwind 3 (via `@astrojs/tailwind`) + `@tailwindcss/typography`, with `future.h
 ## Agent skills
 
 Project-local skills live in `.agents/skills/` (symlinked into `.claude/skills/`, tracked in `skills-lock.json`): `astro`, `seo-audit`, `accessibility`, `emil-design-eng`.
+
+Project subagent `.claude/agents/seo-procuradora.md` (`seo-procuradora`): SEO specialist for ranking "procurador/procuradora Córdoba". It holds the verified business facts (colegiada nº 367, service area, no physical office), the keyword map and the audit workflow; keep it updated when those facts change.

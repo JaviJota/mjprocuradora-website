@@ -25,7 +25,7 @@ const schema = {
 			"@id": `${site}/#negocio`,
 			name: "María José Carralero Medina · Procuradora en Córdoba",
 			description:
-				"Procuradora de los Tribunales en Córdoba. Representación procesal, presentación de escritos y control de plazos, embargos, subastas y ejecuciones, en coordinación con abogados.",
+				"Procuradora de los Tribunales en Córdoba desde 2001. Representación procesal, presentación de escritos y control de plazos, embargos, subastas y ejecuciones, en coordinación con abogados.",
 			url: `${site}/`,
 			image: new URL(ogImage.src, site).href,
 			logo: new URL(logo.src, site).href,
@@ -54,6 +54,16 @@ const schema = {
 			"@id": `${site}/#persona`,
 			name: "María José Carralero Medina",
 			jobTitle: "Procuradora de los Tribunales",
+			sameAs: [
+				"https://www.procucordoba.org/Colegiados/COL_CARRALERO_MEDINA_MARIA_JOSE.html",
+			],
+			subjectOf: {
+				"@type": "CreativeWork",
+				name: "Córdoba Ahora: María José Carralero, decana del Colegio de Procuradores de Córdoba",
+				url: "https://www.youtube.com/watch?v=NQ8PBll4S4E",
+				publisher: { "@type": "Organization", name: "Onda Mezquita TV" },
+				datePublished: "2020-05-08",
+			},
 			identifier: {
 				"@type": "PropertyValue",
 				name: "Número de colegiada (Ilustre Colegio de Procuradores de Córdoba)",
