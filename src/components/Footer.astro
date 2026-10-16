@@ -1,12 +1,41 @@
 ---
+import Mail from "../icons/Mail.astro"
+import Phone from "../icons/Phone.astro"
+
 const currentYear = new Date().getFullYear()
 ---
 
-<div class="pt-10 pb-5 text-center">
-    <div class="flex flex-col lg:flex-row mb-9 gap-4 lg:gap-8 items-center justify-center">
-        <a class="underline transition text-white hover:text-gray-300" href="/aviso-legal">Aviso Legal</a>
-        <a class="underline transition text-white hover:text-gray-300" href="/politica-de-privacidad">Política de privacidad</a>
-        <a class="underline transition text-white hover:text-gray-300" href="/contacto">Contacto</a>
+<footer class="mt-16 border-t border-white/10 bg-brand-ink/60">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
+        <div>
+            <p class="font-semibold text-white">María José Carralero Medina</p>
+            <p class="mt-1 text-white/75">Procuradora de los Tribunales en Córdoba</p>
+        </div>
+
+        <address class="not-italic">
+            <p class="font-semibold text-white">Contacto</p>
+            <ul class="mt-3 space-y-2">
+                <li class="flex items-center gap-3">
+                    <Mail />
+                    <a class="text-white/75 underline-offset-4 hover:text-white hover:underline" href="mailto:mjcarralero@cordoba.cgpe.net">mjcarralero@cordoba.cgpe.net</a>
+                </li>
+                <li class="flex items-center gap-3">
+                    <Phone />
+                    <a class="text-white/75 underline-offset-4 hover:text-white hover:underline" href="tel:+34687775744">+34 687 775 744</a>
+                </li>
+            </ul>
+        </address>
+
+        <nav aria-label="Información legal">
+            <p class="font-semibold text-white">Legal</p>
+            <ul class="mt-3 space-y-2">
+                <li><a class="text-white/75 underline-offset-4 hover:text-white hover:underline" href="/aviso-legal">Aviso legal</a></li>
+                <li><a class="text-white/75 underline-offset-4 hover:text-white hover:underline" href="/politica-de-privacidad">Política de privacidad</a></li>
+            </ul>
+        </nav>
     </div>
-   <p class="w-72 lg:w-full text-white opacity-55 text-sm mx-auto"> © {currentYear} María José Carralero Medina. <br>Todos los derechos reservados.</p>
-</div>
+
+    <p class="border-t border-white/10 px-4 py-5 text-center text-sm text-white/70">
+        © {currentYear} María José Carralero Medina. Todos los derechos reservados.
+    </p>
+</footer>

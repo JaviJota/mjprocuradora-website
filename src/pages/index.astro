@@ -1,8 +1,43 @@
 ---
 import Home from '../components/Home.astro';
 import Layout from '../layouts/Layout.astro';
+
+const schema = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "LegalService",
+			"@id": "https://www.procuradoraencordoba.es/#negocio",
+			name: "María José Carralero Medina · Procuradora en Córdoba",
+			url: "https://www.procuradoraencordoba.es/",
+			telephone: "+34687775744",
+			email: "mjcarralero@cordoba.cgpe.net",
+			areaServed: [
+				{ "@type": "City", name: "Córdoba" },
+				{ "@type": "AdministrativeArea", name: "Andalucía" },
+			],
+			founder: { "@id": "https://www.procuradoraencordoba.es/#persona" },
+		},
+		{
+			"@type": "Person",
+			"@id": "https://www.procuradoraencordoba.es/#persona",
+			name: "María José Carralero Medina",
+			jobTitle: "Procuradora de los Tribunales",
+			worksFor: { "@id": "https://www.procuradoraencordoba.es/#negocio" },
+			memberOf: [
+				{ "@type": "Organization", name: "Ilustre Colegio de Procuradores de Córdoba" },
+				{ "@type": "Organization", name: "Consejo Andaluz de Procuradores" },
+			],
+		},
+	],
+};
 ---
 
-<Layout title="Procuradora Córdoba - María José Carralero Medina">
+<Layout
+	overlayHeader
+	title="Procuradora en Córdoba · María José Carralero Medina"
+	description="María José Carralero Medina, procuradora en Córdoba y Andalucía. Representación procesal, gestión de procedimientos judiciales y trato directo con abogados y clientes."
+>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
 	<Home />
 </Layout>

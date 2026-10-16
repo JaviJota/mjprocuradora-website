@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 import { Resend } from "resend";
 
+export const prerender = false;
+
 dotenv.config();
 
 const resend = new Resend(process.env.RESEND_APIKEY);
@@ -31,8 +33,9 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const ownerResponse = await resend.emails.send({
-      from: "MJ Procuradora <info@procuradoracordoba.com>",
+      from: "MJ Procuradora <info@procuradoraencordoba.es>",
       to: process.env.OWNER_EMAIL!,
+      replyTo: email,
       subject: "Formulario de Contacto",
       html: `
         <div style="font-family: Arial, sans-serif; background-color: #2A3B47; color: white; padding: 20px; border-radius: 10px;">
@@ -48,12 +51,13 @@ export const POST: APIRoute = async ({ request }) => {
     });
     
     if (ownerResponse.error) {
-      throw new Error('Error al enviar formulario');
+      throw new Error('Error al enviar formulario', { cause: ownerResponse.error });
     }
 
     const clientResponse = await resend.emails.send({
-      from: "MJ Procuradora <info@procuradoracordoba.com>",
+      from: "MJ Procuradora <info@procuradoraencordoba.es>",
       to: email,
+      replyTo: process.env.OWNER_EMAIL!,
       subject: "Formulario recibido con éxito",
       html: `
         <h3>¡Hemos recibido tu formulario!</h3>
@@ -64,7 +68,7 @@ export const POST: APIRoute = async ({ request }) => {
     })
 
     if (clientResponse.error) {
-      throw new Error('Error al enviar confirmación');
+      throw new Error('Error al enviar confirmación', { cause: clientResponse.error });
     }
     
     return new Response(JSON.stringify({ success: true }), { status: 200 });
